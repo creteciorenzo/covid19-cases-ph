@@ -7,51 +7,33 @@
     </q-toolbar>
 
     <div class="q-pa-md q-gutter-y-sm">
-      <div class="row">
-        <div class="q-pa-md items-start q-gutter-md col-3">
-          <q-card flat bordered class="bg-blue-14 text-white">
-            <q-card-section class="row">
-              <div class="col">
-                <div class="text-h6 text-center">Total Cases</div>
-                <div class="text-h6 text-center text-weight-bold">{{summary.length}}</div>
-              </div>
-            </q-card-section>
-          </q-card>
-        </div>
-        <div class="q-pa-md items-start q-gutter-md col-3">
-          <q-card flat bordered class="bg-red-14 text-white">
-            <q-card-section class="row">
-              <div class="col">
-                <div class="text-h6 text-center">Confirmed Cases</div>
-                <div class="text-h6 text-center text-weight-bold">{{testResult.confirmed_cases}}</div>
-              </div>
-            </q-card-section>
-          </q-card>
-        </div>
-        <div class="q-pa-md items-start q-gutter-md col-3">
-          <q-card flat bordered class="bg-teal-14 text-white">
-            <q-card-section class="row">
-              <div class="col">
-                <div class="text-h6 text-center">Negative Cases</div>
-                <div
-                  class="text-h6 text-center text-weight-bold"
-                >{{testResult.cases_tested_negative}}</div>
-              </div>
-            </q-card-section>
-          </q-card>
-        </div>
-        <div class="q-pa-md items-start q-gutter-md col-3">
-          <q-card flat bordered class="bg-amber-14 text-white">
-            <q-card-section class="row">
-              <div class="col">
-                <div class="text-h6 text-center">Pending Cases</div>
-                <div
-                  class="text-h6 text-center text-weight-bold"
-                >{{testResult.cases_pending_test_results}}</div>
-              </div>
-            </q-card-section>
-          </q-card>
-        </div>
+      <div class="row justify-around">
+        <q-card flat bordered style="margin: 1em; max-width: 150px" class="bg-blue-14 text-white">
+          <q-card-section>
+            <div class="text-h6 text-center">Total Cases</div>
+            <div class="text-h6 text-center text-weight-bold">{{summary.length}}</div>
+          </q-card-section>
+        </q-card>
+        <q-card flat bordered style="margin: 1em; max-width: 150px" class="bg-red-14 text-white">
+          <q-card-section>
+            <div class="text-h6 text-center">Confirmed Cases</div>
+            <div class="text-h6 text-center text-weight-bold">{{testResult.confirmed_cases}}</div>
+          </q-card-section>
+        </q-card>
+        <q-card flat bordered style="margin: 1em; max-width: 150px" class="bg-teal-14 text-white">
+          <q-card-section>
+            <div class="text-h6 text-center">Negative Cases</div>
+            <div class="text-h6 text-center text-weight-bold">{{testResult.cases_tested_negative}}</div>
+          </q-card-section>
+        </q-card>
+        <q-card flat bordered style="margin: 1em; max-width: 150px" class="bg-amber-14 text-white">
+          <q-card-section>
+            <div class="text-h6 text-center">Pending Cases</div>
+            <div
+              class="text-h6 text-center text-weight-bold"
+            >{{testResult.cases_pending_test_results}}</div>
+          </q-card-section>
+        </q-card>
       </div>
 
       <div class="q-pa-md">
