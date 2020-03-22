@@ -1,8 +1,8 @@
 {
   "name": "covid19-frontend",
   "version": "0.0.1",
-  "description": "A frontend app for covid 19 cases",
-  "productName": "Frontend for covid19 tracker",
+  "description": "A application for tracking coronavirus outbreak in the Philippines ",
+  "productName": "Philippine Covid-19 Update",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
   "author": "Renzo R. Cretecio",
