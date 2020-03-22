@@ -113,9 +113,9 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Frontend for covid19 tracker',
-        short_name: 'Frontend for covid19 tracker',
-        description: 'A frontend app for covid 19 cases',
+        name: 'Philippine Covid-19 Update',
+        short_name: 'Philippine Covid-19 Update',
+        description: 'A application for tracking coronavirus outbreak in the Philippines',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
