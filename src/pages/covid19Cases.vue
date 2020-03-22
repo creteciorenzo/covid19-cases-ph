@@ -9,7 +9,7 @@
       <q-card
         flat
         bordered
-        style="margin: 1em; min-width: 200px"
+        style="margin: 0.5em; min-width: 200px"
         class="col-md-3 bg-blue-14 text-white"
       >
         <q-card-section>
@@ -20,7 +20,7 @@
       <q-card
         flat
         bordered
-        style="margin: 1em; min-width: 200px"
+        style="margin: 0.5em; min-width: 200px"
         class="col-md-3 bg-red-14 text-white"
       >
         <q-card-section>
@@ -31,7 +31,7 @@
       <q-card
         flat
         bordered
-        style="margin: 1em; min-width: 200px"
+        style="margin: 0.5em; min-width: 200px"
         class="bg-teal-14 text-white col-md-3"
       >
         <q-card-section>
@@ -42,7 +42,7 @@
       <q-card
         flat
         bordered
-        style="margin: 1em; min-width: 200px"
+        style="margin: 0.5em; min-width: 200px"
         class="bg-amber-14 text-white col-md-3"
       >
         <q-card-section>
@@ -179,10 +179,32 @@
         </q-card-section>
       </q-card>
     </div>
+
+    <div class="row justify-center bg-grey-3" style="height: 100px;">
+      <div class="col-md-10 text-center" style="padding-top: 2em; border-top: 1px solid #bdbdbd">
+        <p>
+          &copy; {{year}}
+          <a
+            class="ig-link"
+            href="https://www.instagram.com/xromanticgarbage/"
+            target="_blank"
+          >RENZO R. CRETECIO</a>. All Rights Reserve
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
-<style lang="stylus"></style>
+<style>
+.ig-link {
+  list-style: none;
+  text-decoration: none;
+  color: #1c1d24;
+}
+.ig-link:hover {
+  text-decoration: underline;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -194,6 +216,8 @@ export default {
   mounted() {
     this.fetchCases();
     this.fetchTestResult();
+    this.today = new Date();
+    this.year = this.today.getFullYear();
   },
 
   methods: {
@@ -227,6 +251,8 @@ export default {
       caseInfo: [],
       fullHeight: false,
       overall: null,
+      today: null,
+      year: null,
       columns: [
         {
           name: "caseNo",
