@@ -5,12 +5,13 @@
       <q-toolbar-title>PH Covid-19 Cases</q-toolbar-title>
       <q-btn flat round dense icon="more_vert" />
     </q-toolbar>
+
     <div class="row justify-center">
       <q-card
         flat
         bordered
         style="margin: 0.5em; min-width: 200px"
-        class="col-md-3 bg-blue-14 text-white"
+        class="col-md-2 col-lg-2 bg-blue-14 text-white"
       >
         <q-card-section>
           <div class="text-h6 text-center">Total Cases</div>
@@ -21,7 +22,7 @@
         flat
         bordered
         style="margin: 0.5em; min-width: 200px"
-        class="col-md-3 bg-red-14 text-white"
+        class="col-md-2 col-lg-2 bg-red-14 text-white"
       >
         <q-card-section>
           <div class="text-h6 text-center">Confirmed Cases</div>
@@ -32,7 +33,7 @@
         flat
         bordered
         style="margin: 0.5em; min-width: 200px"
-        class="bg-teal-14 text-white col-md-3"
+        class="bg-teal-14 col-md-2 col-lg-2 text-white"
       >
         <q-card-section>
           <div class="text-h6 text-center">Negative Cases</div>
@@ -43,7 +44,7 @@
         flat
         bordered
         style="margin: 0.5em; min-width: 200px"
-        class="bg-amber-14 text-white col-md-3"
+        class="bg-amber-14 col-md-2 col-lg-2 text-white"
       >
         <q-card-section>
           <div class="text-h6 text-center">Pending Cases</div>
@@ -71,8 +72,8 @@
 
       <q-dialog v-model="fullHeight" full-height>
         <q-card class="column full-height scroll" style="width: 700px">
-          <q-card-section class="row justify-between">
-            <div class="text-h4">Patient Information</div>
+          <q-card-section class="row align-center justify-between">
+            <div class="col-md-8 text-h4">Patient Information</div>
             <q-btn align="right" dense flat icon="close" v-close-popup>
               <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
             </q-btn>
