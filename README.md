@@ -1,6 +1,6 @@
-# Frontend for covid19 tracker (covid19-frontend)
+# A application for tracking coronavirus outbreak in the Philippines
 
-A frontend app for covid 19 cases
+Philippine covid-19 update
 
 ## Install the dependencies
 ```bash
