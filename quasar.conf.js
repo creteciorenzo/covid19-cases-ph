@@ -114,7 +114,7 @@ module.exports = function (ctx) {
       workboxOptions: {}, // only for GenerateSW
       manifest: {
         name: 'Philippine Covid-19 Update',
-        short_name: 'Philippine Covid-19 Update',
+        short_name: 'PH Covid-19 Update',
         description: 'A application for tracking coronavirus outbreak in the Philippines',
         display: 'standalone',
         orientation: 'portrait',
