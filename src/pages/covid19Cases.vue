@@ -1,18 +1,18 @@
 <template>
   <div class="main-bg">
     <div class="q-pa-md row justify-center" style="padding-top:1em ">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <q-card flat bordered style="margin: 0.5em; max-width: 300px" class="case-count-today">
           <q-card-section>
-            <div class="text-h6 text-center">Today Cases</div>
+            <div class="text-h6 text-center">New Confirmed Cases</div>
             <div class="text-h6 text-center text-weight-bold">{{casesToday.todayCases}}</div>
           </q-card-section>
         </q-card>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <q-card flat bordered style="margin: 0.5em; max-width: 300px" class="case-count-today">
           <q-card-section>
-            <div class="text-h6 text-center">Today Deaths</div>
+            <div class="text-h6 text-center">New Confirmed Deaths</div>
             <div class="text-h6 text-center text-weight-bold">{{casesToday.todayDeaths}}</div>
           </q-card-section>
         </q-card>
@@ -118,7 +118,7 @@
         </q-card>
       </q-dialog>
     </div>
-    <div class="q-pa-md row justify-between" style="padding-top:1em ">
+    <div class="q-pa-md row justify-center" style="padding-top:1em ">
       <q-card
         flat
         bordered
