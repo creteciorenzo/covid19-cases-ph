@@ -22,9 +22,16 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered content-class="aside">
       <q-list>
-        <q-item clickable v-ripple>
-          <q-item-section class="text-h6 text-weight-thin">Metro Manila Checkpoints</q-item-section>
-        </q-item>
+        <router-link class="link" to="/">
+          <q-item clickable v-ripple>
+            <q-item-section class="text-h6 text-weight-thin">Covid-19 Data</q-item-section>
+          </q-item>
+        </router-link>
+        <router-link class="link" to="/checkpoints">
+          <q-item clickable v-ripple>
+            <q-item-section class="text-h6 text-weight-thin">Metro Manila Checkpoints</q-item-section>
+          </q-item>
+        </router-link>
         <q-item clickable v-ripple>
           <q-item-section class="text-h6 text-weight-thin">PH LGU Lockdown</q-item-section>
         </q-item>
@@ -39,6 +46,11 @@
 <style>
 .aside {
   background-color: #072028;
+  color: #e6e6e6;
+}
+
+.link {
+  text-decoration: none;
   color: #e6e6e6;
 }
 

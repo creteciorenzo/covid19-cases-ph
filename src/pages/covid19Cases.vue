@@ -17,6 +17,9 @@
           </q-card-section>
         </q-card>
       </div>
+      <!-- <div class="col-md-10">
+        <line-chart :chart-data="datacollection" style="height: 250px"></line-chart>
+      </div>-->
     </div>
 
     <div class="q-pa-md">
@@ -127,7 +130,7 @@
       >
         <q-card-section>
           <div class="text-h6 text-center">Confirmed Cases</div>
-          <div class="text-h6 text-center text-weight-bold">{{casesToday.cases}}</div>
+          <div class="text-h6 text-center text-weight-thin">{{casesToday.cases}}</div>
         </q-card-section>
       </q-card>
       <q-card
@@ -137,8 +140,13 @@
         class="col-md-3 col-lg-2 case-count"
       >
         <q-card-section>
-          <div class="text-h6 text-center">Deaths</div>
-          <div class="text-h6 text-center text-weight-bold">{{diedStatus.length}}</div>
+          <div class="text-h6 text-center">Death Rate</div>
+          <div class="text-h6 text-center text-weight-thin">
+            {{getFatalityRate}}%
+            <span
+              class="text-h6 text-center text-weight-thin"
+            >({{diedStatus.length}})</span>
+          </div>
         </q-card-section>
       </q-card>
       <q-card
@@ -148,8 +156,13 @@
         class="col-md-3 col-lg-2 case-count"
       >
         <q-card-section>
-          <div class="text-h6 text-center">Recovered</div>
-          <div class="text-h6 text-center text-weight-bold">{{recoveredStatus.length}}</div>
+          <div class="text-h6 text-center">Recovery Rate</div>
+          <div class="text-h6 text-center text-weight-thin">
+            {{getRecoveryRate}}%
+            <span
+              class="text-h6 text-center text-weight-thin"
+            >({{recoveredStatus.length}})</span>
+          </div>
         </q-card-section>
       </q-card>
     </div>
@@ -189,7 +202,6 @@
         </q-card>
       </div>
     </div>
-
     <div class="row justify-center ft" style="height: 100px;">
       <div class="col-md-10 text-center" style="padding-top: 2em;">
         <p>
@@ -265,7 +277,11 @@
 
 <script>
 import axios from "axios";
+import LineChart from "./chart.js";
 export default {
+  components: {
+    LineChart
+  },
   beforeDestroy() {
     // this.fetchCases.destroy();
     // this.fetchTestResult.destroy();
@@ -276,6 +292,7 @@ export default {
     this.fetchTodayCases();
     this.today = new Date();
     this.year = this.today.getFullYear();
+    this.fillData();
   },
 
   methods: {
@@ -284,6 +301,14 @@ export default {
         .get("https://coronavirus-ph-api.now.sh/cases")
         .then(response => {
           this.summary = response.data;
+          let result = response.data;
+          let date = [];
+          for (let i = 0; i < result.length; i++) {
+            let dt = result[i].date;
+            date.push(dt);
+          }
+          this.dates = date;
+          this.data = this.dates;
         })
         .catch(e => {
           console.log(e);
@@ -307,6 +332,34 @@ export default {
     infoDialog(p) {
       this.fullHeight = true;
       this.caseInfo = p.row;
+    },
+    fillData() {
+      this.datacollection = {
+        labels: ["Jan", "Feb", "Mar", "Apr"],
+        datasets: [
+          {
+            label: "My First dataset",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "rgba(75,192,192,1)",
+            borderCapStyle: "butt",
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: "miter",
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 5,
+            pointHitRadius: 10,
+            data: [65, 59, 80, 34]
+          }
+        ]
+      };
     }
   },
   data() {
@@ -353,7 +406,8 @@ export default {
           field: "status"
         },
         { name: "actions", label: "More Info", field: "", align: "center" }
-      ]
+      ],
+      dataCollection: null
     };
   },
   computed: {
@@ -386,6 +440,14 @@ export default {
     },
     ageGroup60plus() {
       return this.summary.filter(a => a.age > 60);
+    },
+    getFatalityRate() {
+      var result = (this.diedStatus.length * 100) / this.summary.length;
+      return result.toFixed(2);
+    },
+    getRecoveryRate() {
+      var result = (this.recoveredStatus.length * 100) / this.summary.length;
+      return result.toFixed(2);
     }
   }
 };
