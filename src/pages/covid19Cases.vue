@@ -1,15 +1,37 @@
 <template>
   <div class="main-bg">
-    <div class="q-pa-md row" style="padding-top:1em ">
+    <div class="q-pa-md row justify-center" style="padding-top:1em ">
       <q-card
         flat
         bordered
         style="margin: 0.5em; min-width: 200px"
-        class="col-md-2 col-lg-2 case-count"
+        class="col-md-3 col-lg-2 case-count"
       >
         <q-card-section>
           <div class="text-h6 text-center">Confirmed Cases</div>
           <div class="text-h6 text-center text-weight-bold">{{summary.length}}</div>
+        </q-card-section>
+      </q-card>
+      <q-card
+        flat
+        bordered
+        style="margin: 0.5em; min-width: 200px"
+        class="col-md-3 col-lg-2 case-count"
+      >
+        <q-card-section>
+          <div class="text-h6 text-center">Deaths</div>
+          <div class="text-h6 text-center text-weight-bold">{{diedStatus.length}}</div>
+        </q-card-section>
+      </q-card>
+      <q-card
+        flat
+        bordered
+        style="margin: 0.5em; min-width: 200px"
+        class="col-md-3 col-lg-2 case-count"
+      >
+        <q-card-section>
+          <div class="text-h6 text-center">Recovered</div>
+          <div class="text-h6 text-center text-weight-bold">{{recoveredStatus.length}}</div>
         </q-card-section>
       </q-card>
     </div>
@@ -113,34 +135,42 @@
         </q-card>
       </q-dialog>
     </div>
-
-    <div class="row justify-around">
-      <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
-        <q-card-section>
-          <bar-chart
-            :data="[
-      ['Deaths', diedStatus.length],
-      ['Recovered', recoveredStatus.length],
-      ['Admitted', admittedStatus.length]
+    <div class="q-pa-md">
+      <div class="row justify-around">
+        <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
+          <q-card-section>
+            <div class="text-h6">Cases by Age Group</div>
+          </q-card-section>
+          <q-card-section>
+            <bar-chart
+              :data="[
+        ['1-17', ageGroup1to17.length],
+        ['18-30', ageGroup18to30.length],
+        ['31-45', ageGroup31to45.length],
+        ['46-60', ageGroup46to60.length],
+        ['60+', ageGroup60plus.length]
     ]"
-          ></bar-chart>
-        </q-card-section>
-      </q-card>
+            ></bar-chart>
+          </q-card-section>
+        </q-card>
 
-      <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
-        <q-card-section>
-          <pie-chart
-            :donut="true"
-            :colors="['#ff7aad','#0170bf']"
-            :data="[
+        <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
+          <q-card-section>
+            <div class="text-h6">Cases by Gender</div>
+          </q-card-section>
+          <q-card-section>
+            <pie-chart
+              :donut="true"
+              :colors="['#ff7aad','#0170bf']"
+              :data="[
       ['Female', femaleCase.length],
       ['Male', maleCase.length]
     ]"
-          ></pie-chart>
-        </q-card-section>
-      </q-card>
+            ></pie-chart>
+          </q-card-section>
+        </q-card>
+      </div>
     </div>
-
     <div class="row justify-center ft" style="height: 100px;">
       <div class="col-md-10 text-center" style="padding-top: 2em;">
         <p>
@@ -194,6 +224,7 @@
   background-color: #0092a4;
   color: #e6e6e6;
   box-shadow: 0 20px 30px 0 #ffffff;
+  min-width: 300px;
 }
 
 .ft {
@@ -307,6 +338,21 @@ export default {
     },
     admittedStatus() {
       return this.summary.filter(s => s.status === "Admitted");
+    },
+    ageGroup1to17() {
+      return this.summary.filter(a => a.age < 18);
+    },
+    ageGroup18to30() {
+      return this.summary.filter(a => a.age >= 18 && a.age <= 30);
+    },
+    ageGroup31to45() {
+      return this.summary.filter(a => a.age >= 31 && a.age <= 45);
+    },
+    ageGroup46to60() {
+      return this.summary.filter(a => a.age >= 46 && a.age <= 60);
+    },
+    ageGroup60plus() {
+      return this.summary.filter(a => a.age > 60);
     }
   }
 };
