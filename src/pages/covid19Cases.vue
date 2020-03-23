@@ -66,9 +66,9 @@
       </q-table>
 
       <q-dialog v-model="fullHeight" full-height>
-        <q-card class="column full-height scroll" style="width: 700px">
+        <q-card class="column full-height dlg" style="width: 700px;">
           <q-card-section class="row align-center justify-between">
-            <div class="col-md-8 text-h4">Patient Information</div>
+            <div class="text-h4 dlg-title">Patient Information</div>
             <q-btn align="right" dense flat icon="close" v-close-popup>
               <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
             </q-btn>
@@ -205,6 +205,11 @@
   color: #e6e6e6;
 }
 
+.dlg {
+  background-color: #0092a4;
+  color: #e6e6e6;
+}
+
 .chart-card {
   background-color: #072028;
   color: #e6e6e6;
@@ -229,6 +234,12 @@
 .ft {
   background-color: #072028;
   color: #e6e6e6;
+}
+
+@media screen and (max-width: 30rem) {
+  .dlg-title {
+    font-size: 6vw;
+  }
 }
 </style>
 
