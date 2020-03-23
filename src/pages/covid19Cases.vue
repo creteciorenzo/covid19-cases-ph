@@ -1,39 +1,22 @@
 <template>
   <div class="main-bg">
     <div class="q-pa-md row justify-center" style="padding-top:1em ">
-      <q-card
-        flat
-        bordered
-        style="margin: 0.5em; min-width: 200px"
-        class="col-md-3 col-lg-2 case-count"
-      >
-        <q-card-section>
-          <div class="text-h6 text-center">Confirmed Cases</div>
-          <div class="text-h6 text-center text-weight-bold">{{summary.length}}</div>
-        </q-card-section>
-      </q-card>
-      <q-card
-        flat
-        bordered
-        style="margin: 0.5em; min-width: 200px"
-        class="col-md-3 col-lg-2 case-count"
-      >
-        <q-card-section>
-          <div class="text-h6 text-center">Deaths</div>
-          <div class="text-h6 text-center text-weight-bold">{{diedStatus.length}}</div>
-        </q-card-section>
-      </q-card>
-      <q-card
-        flat
-        bordered
-        style="margin: 0.5em; min-width: 200px"
-        class="col-md-3 col-lg-2 case-count"
-      >
-        <q-card-section>
-          <div class="text-h6 text-center">Recovered</div>
-          <div class="text-h6 text-center text-weight-bold">{{recoveredStatus.length}}</div>
-        </q-card-section>
-      </q-card>
+      <div class="col-md-3">
+        <q-card flat bordered style="margin: 0.5em; max-width: 300px" class="case-count-today">
+          <q-card-section>
+            <div class="text-h6 text-center">Today Cases</div>
+            <div class="text-h6 text-center text-weight-bold">{{casesToday.todayCases}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-md-3">
+        <q-card flat bordered style="margin: 0.5em; max-width: 300px" class="case-count-today">
+          <q-card-section>
+            <div class="text-h6 text-center">Today Deaths</div>
+            <div class="text-h6 text-center text-weight-bold">{{casesToday.todayDeaths}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
     </div>
 
     <div class="q-pa-md">
@@ -135,6 +118,41 @@
         </q-card>
       </q-dialog>
     </div>
+    <div class="q-pa-md row justify-between" style="padding-top:1em ">
+      <q-card
+        flat
+        bordered
+        style="margin: 0.5em; min-width: 200px"
+        class="col-md-3 col-lg-2 case-count"
+      >
+        <q-card-section>
+          <div class="text-h6 text-center">Confirmed Cases</div>
+          <div class="text-h6 text-center text-weight-bold">{{casesToday.cases}}</div>
+        </q-card-section>
+      </q-card>
+      <q-card
+        flat
+        bordered
+        style="margin: 0.5em; min-width: 200px"
+        class="col-md-3 col-lg-2 case-count"
+      >
+        <q-card-section>
+          <div class="text-h6 text-center">Deaths</div>
+          <div class="text-h6 text-center text-weight-bold">{{diedStatus.length}}</div>
+        </q-card-section>
+      </q-card>
+      <q-card
+        flat
+        bordered
+        style="margin: 0.5em; min-width: 200px"
+        class="col-md-3 col-lg-2 case-count"
+      >
+        <q-card-section>
+          <div class="text-h6 text-center">Recovered</div>
+          <div class="text-h6 text-center text-weight-bold">{{recoveredStatus.length}}</div>
+        </q-card-section>
+      </q-card>
+    </div>
     <div class="q-pa-md">
       <div class="row justify-around">
         <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
@@ -171,6 +189,7 @@
         </q-card>
       </div>
     </div>
+
     <div class="row justify-center ft" style="height: 100px;">
       <div class="col-md-10 text-center" style="padding-top: 2em;">
         <p>
@@ -189,6 +208,11 @@
 <style>
 .main-bg {
   background-image: linear-gradient(to bottom, #072028, #0092a4);
+}
+
+.case-count-today {
+  background-color: #eb4034;
+  color: #e6e6e6;
 }
 .ig-link {
   list-style: none;
@@ -249,6 +273,7 @@ export default {
   mounted() {
     this.fetchCases();
     this.fetchTestResult();
+    this.fetchTodayCases();
     this.today = new Date();
     this.year = this.today.getFullYear();
   },
@@ -271,6 +296,14 @@ export default {
           this.testResult = response.data;
         });
     },
+
+    fetchTodayCases() {
+      axios
+        .get("https://coronavirus-19-api.herokuapp.com/countries/Philippines")
+        .then(response => {
+          this.casesToday = response.data;
+        });
+    },
     infoDialog(p) {
       this.fullHeight = true;
       this.caseInfo = p.row;
@@ -278,10 +311,10 @@ export default {
   },
   data() {
     return {
-      covidSrvc: null,
       summary: [],
       testResult: [],
       caseInfo: [],
+      casesToday: [],
       fullHeight: false,
       overall: null,
       today: null,
