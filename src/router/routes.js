@@ -1,16 +1,15 @@
-const routes = [
-  // {
-  //   path: '/',
-  //   component: () => import('layouts/MainLayout.vue'),
-  //   children: [{
-  //     path: '',
-  //     component: () => import('pages/Index.vue')
-  //   }]
-  // },
-  {
+const routes = [{
     path: '/',
-    component: () => import('pages/covid19Cases')
-  }
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{
+      path: '',
+      component: () => import('pages/covid19Cases')
+    }]
+  },
+  // {
+  //   path: '/case',
+  //   component: () => import('pages/covid19Cases')
+  // }
 ]
 
 // Always leave this as last one

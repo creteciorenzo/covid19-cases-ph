@@ -1,17 +1,11 @@
 <template>
-  <div>
-    <q-toolbar class="text-primary bg-grey-3">
-      <q-btn flat round dense icon="menu" />
-      <q-toolbar-title>PH Covid-19 Cases</q-toolbar-title>
-      <q-btn flat round dense icon="more_vert" />
-    </q-toolbar>
-
-    <div class="row justify-center">
+  <div class="main-bg">
+    <div class="row justify-center" style="padding-top:1em ">
       <q-card
         flat
         bordered
         style="margin: 0.5em; min-width: 200px"
-        class="col-md-2 col-lg-2 bg-blue-14 text-white"
+        class="col-md-2 col-lg-2 case-count"
       >
         <q-card-section>
           <div class="text-h6 text-center">Total Cases</div>
@@ -22,7 +16,7 @@
         flat
         bordered
         style="margin: 0.5em; min-width: 200px"
-        class="col-md-2 col-lg-2 bg-red-14 text-white"
+        class="col-md-2 col-lg-2 case-count"
       >
         <q-card-section>
           <div class="text-h6 text-center">Confirmed Cases</div>
@@ -33,10 +27,10 @@
         flat
         bordered
         style="margin: 0.5em; min-width: 200px"
-        class="bg-teal-14 col-md-2 col-lg-2 text-white"
+        class="col-md-2 col-lg-2 case-count"
       >
         <q-card-section>
-          <div class="text-h6 text-center">Negative Cases</div>
+          <div class="text-h6 text-center">Tested Negative</div>
           <div class="text-h6 text-center text-weight-bold">{{testResult.cases_tested_negative}}</div>
         </q-card-section>
       </q-card>
@@ -44,7 +38,7 @@
         flat
         bordered
         style="margin: 0.5em; min-width: 200px"
-        class="bg-amber-14 col-md-2 col-lg-2 text-white"
+        class="col-md-2 col-lg-2 case-count"
       >
         <q-card-section>
           <div class="text-h6 text-center">Pending Cases</div>
@@ -62,10 +56,11 @@
         :columns="columns"
         color="primary"
         row-key="name"
+        class="case-table"
       >
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
-            <q-btn dense round flat color="primary" @click="infoDialog(props)" icon="info"></q-btn>
+            <q-btn dense round flat class="tbl-btn" @click="infoDialog(props)" icon="info"></q-btn>
           </q-td>
         </template>
       </q-table>
@@ -155,19 +150,19 @@
     </div>
 
     <div class="row justify-around">
-      <q-card flat bordered class="col-md-5" style="margin:1em 0; min-width: 300px">
+      <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
         <q-card-section>
-          <column-chart
+          <bar-chart
             :data="[
       ['Confirmed cases', testResult.confirmed_cases],
       ['Negative cases', testResult.cases_tested_negative],
       ['Pending cases', testResult.cases_pending_test_results]
     ]"
-          ></column-chart>
+          ></bar-chart>
         </q-card-section>
       </q-card>
 
-      <q-card flat bordered class="col-md-5" style="margin:1em 0; min-width: 300px">
+      <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
         <q-card-section>
           <pie-chart
             :donut="true"
@@ -181,8 +176,8 @@
       </q-card>
     </div>
 
-    <div class="row justify-center bg-grey-3" style="height: 100px;">
-      <div class="col-md-10 text-center" style="padding-top: 2em; border-top: 1px solid #bdbdbd">
+    <div class="row justify-center ft" style="height: 100px;">
+      <div class="col-md-10 text-center" style="padding-top: 2em;">
         <p>
           &copy; {{year}}
           <a
@@ -197,13 +192,43 @@
 </template>
 
 <style>
+.main-bg {
+  background-image: linear-gradient(to bottom, #072028, #0092a4);
+}
 .ig-link {
   list-style: none;
   text-decoration: none;
   color: #1c1d24;
 }
+.case-table {
+  background-color: #072028;
+  color: #e6e6e6;
+}
+
+.chart-card {
+  background-color: #072028;
+  color: #e6e6e6;
+}
+
+.tbl-btn {
+  color: #04c3db;
+}
+
+.ig-link {
+  color: #04c3db;
+}
 .ig-link:hover {
   text-decoration: underline;
+}
+.case-count {
+  background-color: #0092a4;
+  color: #e6e6e6;
+  box-shadow: 0 20px 30px 0 #ffffff;
+}
+
+.ft {
+  background-color: #072028;
+  color: #e6e6e6;
 }
 </style>
 
