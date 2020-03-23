@@ -2,9 +2,14 @@ const routes = [{
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [{
-      path: '',
-      component: () => import('pages/covid19Cases')
-    }]
+        path: '',
+        component: () => import('pages/covid19Cases')
+      },
+      {
+        path: 'checkpoints',
+        component: () => import('pages/mmCheckpoints')
+      }
+    ]
   },
   // {
   //   path: '/case',

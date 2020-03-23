@@ -1,17 +1,6 @@
 <template>
   <div class="main-bg">
-    <div class="row justify-center" style="padding-top:1em ">
-      <q-card
-        flat
-        bordered
-        style="margin: 0.5em; min-width: 200px"
-        class="col-md-2 col-lg-2 case-count"
-      >
-        <q-card-section>
-          <div class="text-h6 text-center">Total Cases</div>
-          <div class="text-h6 text-center text-weight-bold">{{summary.length}}</div>
-        </q-card-section>
-      </q-card>
+    <div class="q-pa-md row" style="padding-top:1em ">
       <q-card
         flat
         bordered
@@ -20,31 +9,7 @@
       >
         <q-card-section>
           <div class="text-h6 text-center">Confirmed Cases</div>
-          <div class="text-h6 text-center text-weight-bold">{{testResult.confirmed_cases}}</div>
-        </q-card-section>
-      </q-card>
-      <q-card
-        flat
-        bordered
-        style="margin: 0.5em; min-width: 200px"
-        class="col-md-2 col-lg-2 case-count"
-      >
-        <q-card-section>
-          <div class="text-h6 text-center">Tested Negative</div>
-          <div class="text-h6 text-center text-weight-bold">{{testResult.cases_tested_negative}}</div>
-        </q-card-section>
-      </q-card>
-      <q-card
-        flat
-        bordered
-        style="margin: 0.5em; min-width: 200px"
-        class="col-md-2 col-lg-2 case-count"
-      >
-        <q-card-section>
-          <div class="text-h6 text-center">Pending Cases</div>
-          <div
-            class="text-h6 text-center text-weight-bold"
-          >{{testResult.cases_pending_test_results}}</div>
+          <div class="text-h6 text-center text-weight-bold">{{summary.length}}</div>
         </q-card-section>
       </q-card>
     </div>
@@ -154,9 +119,9 @@
         <q-card-section>
           <bar-chart
             :data="[
-      ['Confirmed cases', testResult.confirmed_cases],
-      ['Negative cases', testResult.cases_tested_negative],
-      ['Pending cases', testResult.cases_pending_test_results]
+      ['Deaths', diedStatus.length],
+      ['Recovered', recoveredStatus.length],
+      ['Admitted', admittedStatus.length]
     ]"
           ></bar-chart>
         </q-card-section>
@@ -333,6 +298,15 @@ export default {
     },
     maleCase() {
       return this.summary.filter(c => c.gender === "M");
+    },
+    diedStatus() {
+      return this.summary.filter(s => s.status === "Died");
+    },
+    recoveredStatus() {
+      return this.summary.filter(s => s.status === "Recovered");
+    },
+    admittedStatus() {
+      return this.summary.filter(s => s.status === "Admitted");
     }
   }
 };
