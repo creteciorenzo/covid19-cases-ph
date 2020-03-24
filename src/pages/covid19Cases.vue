@@ -42,7 +42,7 @@
     <!-- <div class="q-pa-md">
       <div class="row justify-center">
         <div class="col-md-10">
-          <line-chart></line-chart>
+          <lineChart />
         </div>
       </div>
     </div>-->
@@ -269,16 +269,12 @@
 
 <script>
 import axios from "axios";
-import LineChart from "./chart.js";
-import { Line, mixins } from "vue-chartjs";
+import lineChart from "src/components/LineChart.vue";
 export default {
   components: {
-    LineChart
+    lineChart
   },
-  beforeDestroy() {
-    // this.fetchCases.destroy();
-    // this.fetchTestResult.destroy();
-  },
+  beforeDestroy() {},
   mounted() {
     this.fetchCases();
     this.fetchTestResult();
@@ -286,7 +282,6 @@ export default {
     this.today = new Date();
     this.year = this.today.getFullYear();
     this.dateToday = this.today.toDateString();
-    this.fillData();
     this.fetchSeriousCases();
   },
 
@@ -337,34 +332,6 @@ export default {
     infoDialog(p) {
       this.fullHeight = true;
       this.caseInfo = p.row;
-    },
-    fillData() {
-      this.datacollection = {
-        labels: ["Jan", "Feb", "Mar", "Apr"],
-        datasets: [
-          {
-            label: "My First dataset",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: "butt",
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: "miter",
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 5,
-            pointHitRadius: 10,
-            data: [65, 59, 80, 34]
-          }
-        ]
-      };
     }
   },
   data() {
@@ -415,7 +382,7 @@ export default {
         { name: "actions", label: "More Info", field: "", align: "center" }
       ],
       dataCollection: null,
-      options: {
+      chartOptions: {
         responsive: true,
         maintainAspectRatio: false
       }

@@ -10,5 +10,5 @@ export default async ({
   Vue
 }) => {
   Vue.use(Chartkick.use(Chart))
-  Vue.prototype.$moment = moment
+
 }

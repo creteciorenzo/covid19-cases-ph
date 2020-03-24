@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="q-pa-md row justify-center">
+  <div style="height: 100vh">
+    <div class="q-pa-md row justify-center" style="position: relative">
       <div class="col-md-8">
         <div
           style="color: #e6e6e6; margin-bottom: 1em"
@@ -12,20 +12,22 @@
           :zoom="zoom"
           :center="center"
           :options="mapOptions"
-          style="min-height: 300px; min-width: 320px"
+          style="min-height: 500px; min-width: 320px"
         >
-          <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <l-marker
+          <l-tile-layer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
+          <l-circle-marker
             v-for="(c, i) in checkPoints"
             :key="i"
             :lat-lng="setLatLng(c.lat, c.lng)"
             @click="openDialog(c)"
+            :radius="circle.radius"
+            :color="circle.color"
           >
-            <l-icon :icon-size="[20, 20]" :icon-url="icon" />
-          </l-marker>
+            <!-- <l-icon :icon-size="[20, 20]" :icon-url="icon" /> -->
+          </l-circle-marker>
         </l-map>
         <div class="text-subtitle text-grey-13">
-          <span style="text-transform: italic;">Tip:</span>Click the marker to see the Checkpoint Info
+          <span style="text-transform: italic;">Tip:</span>Click the red circle to see the Checkpoint Info
         </div>
       </div>
       <q-dialog v-model="isOpen">
@@ -112,7 +114,8 @@ import {
   LPopup,
   LTooltip,
   LCircle,
-  LPolygon
+  LPolygon,
+  LCircleMarker
 } from "vue2-leaflet";
 export default {
   components: {
@@ -123,7 +126,8 @@ export default {
     LPopup,
     LTooltip,
     LCircle,
-    LPolygon
+    LPolygon,
+    LCircleMarker
   },
   mounted() {
     this.fetchCheckpoints();
@@ -155,7 +159,11 @@ export default {
       },
       icon: require("src/assets/marker.png"),
       isOpen: false,
-      ccData: []
+      ccData: [],
+      circle: {
+        radius: 5,
+        color: "red"
+      }
     };
   }
 };
