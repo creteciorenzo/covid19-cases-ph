@@ -24,6 +24,9 @@
             <l-icon :icon-size="[20, 20]" :icon-url="icon" />
           </l-marker>
         </l-map>
+        <div class="text-subtitle text-grey-13">
+          <span style="text-transform: italic;">Tip:</span>Click the marker to see the Checkpoint Info
+        </div>
       </div>
       <q-dialog v-model="isOpen">
         <q-card class="dlg">
