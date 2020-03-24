@@ -18,7 +18,11 @@
         </q-card>
       </div>
       <!-- <div class="col-md-10">
-        <line-chart :chart-data="datacollection" style="height: 250px"></line-chart>
+        <line-chart
+          :chart-data="datacollection"
+          :options="options"
+          style="max-height: 300px; width: 500px"
+        ></line-chart>
       </div>-->
     </div>
 
@@ -222,6 +226,10 @@
   background-image: linear-gradient(to bottom, #072028, #0092a4);
 }
 
+.canvas {
+  max-height: 200px;
+}
+
 .case-count-today {
   background-color: #eb4034;
   color: #e6e6e6;
@@ -278,6 +286,7 @@
 <script>
 import axios from "axios";
 import LineChart from "./chart.js";
+import { Line, mixins } from "vue-chartjs";
 export default {
   components: {
     LineChart
@@ -292,6 +301,7 @@ export default {
     this.fetchTodayCases();
     this.today = new Date();
     this.year = this.today.getFullYear();
+    this.dateToday = this.today.toDateString();
     this.fillData();
   },
 
@@ -372,6 +382,7 @@ export default {
       overall: null,
       today: null,
       year: null,
+      dateToday: null,
       columns: [
         {
           name: "caseNo",
@@ -407,7 +418,11 @@ export default {
         },
         { name: "actions", label: "More Info", field: "", align: "center" }
       ],
-      dataCollection: null
+      dataCollection: null,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
     };
   },
   computed: {
