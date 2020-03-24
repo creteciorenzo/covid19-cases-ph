@@ -1,31 +1,88 @@
 <template>
-  <div class="main-bg">
-    <div class="q-pa-md row justify-center" style="padding-top:1em ">
-      <div class="col-md-4">
-        <q-card flat bordered style="margin: 0.5em; max-width: 300px" class="case-count-today">
-          <q-card-section>
-            <div class="text-h6 text-center">New Confirmed Cases</div>
-            <div class="text-h6 text-center text-weight-bold">{{casesToday.todayCases}}</div>
-          </q-card-section>
-        </q-card>
+  <div>
+    <div class="q-pa-md">
+      <div class="grid-1" style="padding-top:1em ">
+        <div class="row-1 case-count">
+          <div class="text-h6 text-center fnt-wdth">New Confirmed Cases</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{casesToday.todayCases}}</div>
+        </div>
+        <div class="row-1 case-count">
+          <div class="text-h6 text-center fnt-wdth">New Confirmed Deaths</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{casesToday.todayDeaths}}</div>
+        </div>
+        <div class="row-1 case-count">
+          <div class="text-h6 text-center fnt-wdth">Serious Cases</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{seriousCase}}</div>
+        </div>
+        <div class="row-2 case-count">
+          <div class="text-h6 text-center fnt-wdth">Confirmed Cases</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{casesToday.cases}}</div>
+        </div>
+        <div class="row-2 case-count">
+          <div class="text-h6 text-center fnt-wdth">Death Rate</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">
+            {{getFatalityRate}}%
+            <span
+              class="text-h6 text-center fnt-wdth text-weight-thin"
+            >({{diedStatus.length}})</span>
+          </div>
+        </div>
+        <div class="row-2 case-count">
+          <div class="text-h6 text-center fnt-wdth">Recovery Rate</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">
+            {{getRecoveryRate}}%
+            <span
+              class="text-h6 text-center fnt-wdth text-weight-thin"
+            >({{recoveredStatus.length}})</span>
+          </div>
+        </div>
       </div>
-      <div class="col-md-4">
-        <q-card flat bordered style="margin: 0.5em; max-width: 300px" class="case-count-today">
-          <q-card-section>
-            <div class="text-h6 text-center">New Confirmed Deaths</div>
-            <div class="text-h6 text-center text-weight-bold">{{casesToday.todayDeaths}}</div>
-          </q-card-section>
-        </q-card>
-      </div>
-      <!-- <div class="col-md-10">
-        <line-chart
-          :chart-data="datacollection"
-          :options="options"
-          style="max-height: 300px; width: 500px"
-        ></line-chart>
-      </div>-->
     </div>
 
+    <!-- <div class="q-pa-md">
+      <div class="row justify-center">
+        <div class="col-md-10">
+          <line-chart></line-chart>
+        </div>
+      </div>
+    </div>-->
+
+    <div class="q-pa-md">
+      <div class="row justify-around">
+        <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
+          <q-card-section>
+            <div class="text-h6">Cases by Age Group</div>
+          </q-card-section>
+          <q-card-section>
+            <bar-chart
+              :data="[
+        ['1-17', ageGroup1to17.length],
+        ['18-30', ageGroup18to30.length],
+        ['31-45', ageGroup31to45.length],
+        ['46-60', ageGroup46to60.length],
+        ['60+', ageGroup60plus.length]
+    ]"
+            ></bar-chart>
+          </q-card-section>
+        </q-card>
+
+        <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
+          <q-card-section>
+            <div class="text-h6">Cases by Gender</div>
+          </q-card-section>
+          <q-card-section>
+            <pie-chart
+              :donut="true"
+              :colors="['#ff7aad','#0170bf']"
+              :data="[
+      ['Female', femaleCase.length],
+      ['Male', maleCase.length]
+    ]"
+            ></pie-chart>
+          </q-card-section>
+        </q-card>
+      </div>
+    </div>
     <div class="q-pa-md">
       <q-table
         title="Summary Cases"
@@ -125,87 +182,6 @@
         </q-card>
       </q-dialog>
     </div>
-    <div class="q-pa-md row justify-center" style="padding-top:1em ">
-      <q-card
-        flat
-        bordered
-        style="margin: 0.5em; min-width: 200px"
-        class="col-md-3 col-lg-2 case-count"
-      >
-        <q-card-section>
-          <div class="text-h6 text-center">Confirmed Cases</div>
-          <div class="text-h6 text-center text-weight-thin">{{casesToday.cases}}</div>
-        </q-card-section>
-      </q-card>
-      <q-card
-        flat
-        bordered
-        style="margin: 0.5em; min-width: 200px"
-        class="col-md-3 col-lg-2 case-count"
-      >
-        <q-card-section>
-          <div class="text-h6 text-center">Death Rate</div>
-          <div class="text-h6 text-center text-weight-thin">
-            {{getFatalityRate}}%
-            <span
-              class="text-h6 text-center text-weight-thin"
-            >({{diedStatus.length}})</span>
-          </div>
-        </q-card-section>
-      </q-card>
-      <q-card
-        flat
-        bordered
-        style="margin: 0.5em; min-width: 200px"
-        class="col-md-3 col-lg-2 case-count"
-      >
-        <q-card-section>
-          <div class="text-h6 text-center">Recovery Rate</div>
-          <div class="text-h6 text-center text-weight-thin">
-            {{getRecoveryRate}}%
-            <span
-              class="text-h6 text-center text-weight-thin"
-            >({{recoveredStatus.length}})</span>
-          </div>
-        </q-card-section>
-      </q-card>
-    </div>
-    <div class="q-pa-md">
-      <div class="row justify-around">
-        <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
-          <q-card-section>
-            <div class="text-h6">Cases by Age Group</div>
-          </q-card-section>
-          <q-card-section>
-            <bar-chart
-              :data="[
-        ['1-17', ageGroup1to17.length],
-        ['18-30', ageGroup18to30.length],
-        ['31-45', ageGroup31to45.length],
-        ['46-60', ageGroup46to60.length],
-        ['60+', ageGroup60plus.length]
-    ]"
-            ></bar-chart>
-          </q-card-section>
-        </q-card>
-
-        <q-card flat bordered class="col-md-5 chart-card" style="margin:1em 0; min-width: 300px">
-          <q-card-section>
-            <div class="text-h6">Cases by Gender</div>
-          </q-card-section>
-          <q-card-section>
-            <pie-chart
-              :donut="true"
-              :colors="['#ff7aad','#0170bf']"
-              :data="[
-      ['Female', femaleCase.length],
-      ['Male', maleCase.length]
-    ]"
-            ></pie-chart>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
     <div class="row justify-center ft" style="height: 100px;">
       <div class="col-md-10 text-center" style="padding-top: 2em;">
         <p>
@@ -226,14 +202,15 @@
   background-image: linear-gradient(to bottom, #072028, #0092a4);
 }
 
+.grid-1 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .canvas {
   max-height: 200px;
 }
 
-.case-count-today {
-  background-color: #eb4034;
-  color: #e6e6e6;
-}
 .ig-link {
   list-style: none;
   text-decoration: none;
@@ -265,10 +242,8 @@
   text-decoration: underline;
 }
 .case-count {
-  background-color: #0092a4;
-  color: #e6e6e6;
-  box-shadow: 0 20px 30px 0 #ffffff;
-  min-width: 300px;
+  color: #04c3db;
+  padding: 1em 0;
 }
 
 .ft {
@@ -279,6 +254,15 @@
 @media screen and (max-width: 30rem) {
   .dlg-title {
     font-size: 6vw;
+  }
+
+  .fnt-wdth {
+    font-size: 4vw;
+  }
+}
+@media only screen and (max-width: 48rem) {
+  .grid-1 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>
@@ -303,6 +287,7 @@ export default {
     this.year = this.today.getFullYear();
     this.dateToday = this.today.toDateString();
     this.fillData();
+    this.fetchSeriousCases();
   },
 
   methods: {
@@ -337,6 +322,16 @@ export default {
         .get("https://coronavirus-19-api.herokuapp.com/countries/Philippines")
         .then(response => {
           this.casesToday = response.data;
+        });
+    },
+
+    fetchSeriousCases() {
+      axios
+        .get("https://thevirustracker.com/free-api?countryTotal=PH")
+        .then(res => {
+          this.seriousCase = res.data.countrydata[0].total_serious_cases;
+
+          // console.log(res.data.countrydata[0].total_serious_cases);
         });
     },
     infoDialog(p) {
@@ -374,6 +369,7 @@ export default {
   },
   data() {
     return {
+      seriousCase: null,
       summary: [],
       testResult: [],
       caseInfo: [],

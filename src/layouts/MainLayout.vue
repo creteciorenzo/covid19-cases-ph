@@ -36,7 +36,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="bg">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -66,6 +66,12 @@
 
 .tb-btn {
   color: #e6e6e6;
+}
+
+.bg {
+  background-image: linear-gradient(to bottom, #072028, #0092a4);
+  margin: 0;
+  padding: 0;
 }
 </style>
 <script>
