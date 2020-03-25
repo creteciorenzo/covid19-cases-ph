@@ -71,7 +71,7 @@ export default {
           {
             yAxisID: "dailyCaseAxis",
             label: "Daily Confirmed Case",
-            backgroundColor: "#0092a4",
+            backgroundColor: "#0092a4a1",
             borderColor: "lightblue",
             borderWidth: 3,
             pointRadius: 4,
