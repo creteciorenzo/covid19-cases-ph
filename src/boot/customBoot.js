@@ -9,6 +9,8 @@ export default async ({
   router,
   Vue
 }) => {
+
   Vue.use(Chartkick.use(Chart))
+  Vue.use(require('vue-chartist'))
 
 }

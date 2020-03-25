@@ -4,7 +4,8 @@
       <div class="row justify-center">
         <div class="col-md-10">
           <div class="chart-card">
-            <line-chart :chartData="chartdata" :options="chartOptions" />
+            <!-- <line-chart :chartData="chartdata" :options="chartOptions" /> -->
+            <canvas id="lineChart" width="400" height="400"></canvas>
           </div>
         </div>
       </div>
@@ -20,6 +21,7 @@ import API from "../API";
 export default {
   name: "LineChartContainer",
   components: { LineChart },
+  props: [],
   data() {
     return {
       chartdata: null,
@@ -27,7 +29,6 @@ export default {
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
-
         scales: {
           yAxes: [
             {
@@ -56,7 +57,6 @@ export default {
   },
   async mounted() {
     this.covidCases = await API.getSummaryCase();
-
     this.chartData();
     this.dtFormat();
     this.fillData();
@@ -64,24 +64,28 @@ export default {
 
   methods: {
     fillData() {
-      this.chartdata = {
-        labels: this.dtStr,
-
-        datasets: [
-          {
-            yAxisID: "dailyCaseAxis",
-            label: "Daily Confirmed Case",
-            backgroundColor: "#0092a4a1",
-            borderColor: "lightblue",
-            borderWidth: 3,
-            pointRadius: 4,
-            pointHoverRadius: 6,
-            showLine: true,
-            lineTension: 0,
-            data: this.dailyCase
-          }
-        ]
-      };
+      var ctx = document.getElementById("lineChart");
+      console.log(ctx);
+      this.chartdata = new Chart(ctx, {
+        options: this.chartOptions,
+        type: "line",
+        data: {
+          labels: this.dtStr,
+          datasets: [
+            {
+              label: "Daily Confirmed Case",
+              backgroundColor: "#0092a4a1",
+              borderColor: "lightblue",
+              borderWidth: 3,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              showLine: true,
+              lineTension: 0,
+              data: this.dailyCase
+            }
+          ]
+        }
+      });
     },
 
     chartData() {
@@ -94,8 +98,6 @@ export default {
         const ctgryIndx = categories.indexOf(i);
         count[ctgryIndx] = (count[ctgryIndx] || 0) + 1;
       });
-      this.dailyCase = count;
-
       this.dailyCase = count;
     },
     dtFormat() {
