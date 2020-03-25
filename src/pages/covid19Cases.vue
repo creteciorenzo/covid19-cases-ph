@@ -39,15 +39,7 @@
       </div>
     </div>
 
-    <div class="q-pa-md">
-      <div class="row justify-center">
-        <div class="col-md-10">
-          <q-card flat bordered class="chart-card">
-            <lineChart />
-          </q-card>
-        </div>
-      </div>
-    </div>
+    <lineChart />
 
     <div class="q-pa-md">
       <div class="row justify-around">

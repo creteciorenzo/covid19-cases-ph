@@ -1,7 +1,14 @@
 <template>
-  <div class="container">
-    <line-chart :chartData="chartdata" :options="chartOptions" style="position: relative" />
-    <!-- <div>{{xAxis}}</div> -->
+  <div>
+    <div class="q-pa-md">
+      <div class="row justify-center">
+        <div class="col-md-10">
+          <div class="chart-card">
+            <line-chart :chartData="chartdata" :options="chartOptions" />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,7 +27,6 @@ export default {
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
-        display: true,
 
         scales: {
           yAxes: [
@@ -77,6 +83,7 @@ export default {
         ]
       };
     },
+
     chartData() {
       const dtCombine = this.covidCases.map(a => a.date).flat(1);
       const uniqueDt = [...new Set(dtCombine)];
@@ -97,6 +104,7 @@ export default {
       }
     }
   },
+
   computed: {}
 };
 </script>
