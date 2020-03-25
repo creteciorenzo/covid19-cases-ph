@@ -19,7 +19,7 @@ export default {
     return {
       chartdata: null,
       covidCases: [],
-      deathsRecovered: [],
+      phTimeline: [],
       dateVal: [],
       dtStr: [],
       dailyCase: []
@@ -27,11 +27,10 @@ export default {
   },
   async mounted() {
     this.covidCases = await API.getSummaryCase();
-    this.deathsRecovered = await API.getDthRcvr();
+    this.phTimeline = await API.getTimeline();
     this.chartData();
     this.dtFormat();
     this.fillData();
-    this.getDeathCount();
   },
 
   methods: {
@@ -94,16 +93,6 @@ export default {
         count[ctgryIndx] = (count[ctgryIndx] || 0) + 1;
       });
       this.dailyCase = count;
-    },
-    getDeathCount() {
-      var obj = [];
-      var dod = [];
-      const dateCase = this.covidCases.map(d => d.date);
-      const status = this.covidCases.map(s => s.status);
-
-      // let x = status.filter((element, index) => {
-      //   return index % 2 === 0;
-      // });
     },
 
     dtFormat() {

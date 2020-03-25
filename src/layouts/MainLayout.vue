@@ -30,9 +30,6 @@
             <q-item-section class="text-h6 text-weight-thin">Metro Manila Checkpoints</q-item-section>
           </q-item>
         </router-link>
-        <q-item clickable v-ripple>
-          <q-item-section class="text-h6 text-weight-thin">PH LGU Lockdown List</q-item-section>
-        </q-item>
       </q-list>
     </q-drawer>
 

@@ -7,14 +7,11 @@ const routes = [{
       },
       {
         path: 'checkpoints',
-        component: () => import('pages/mmCheckpoints')
+        component: () => import('pages/mmCheckpoints.vue')
       }
     ]
   },
-  // {
-  //   path: '/case',
-  //   component: () => import('pages/covid19Cases')
-  // }
+
 ]
 
 // Always leave this as last one

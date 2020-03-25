@@ -14,7 +14,7 @@ export default {
     return data
   },
 
-  async getDthRcvr() {
+  async getTimeline() {
     const {
       data
     } = await http1.get('/historical/Philippines')
@@ -25,6 +25,13 @@ export default {
     const {
       data
     } = await http2.get('/cases')
+    return data
+  },
+
+  async getCheckpoints() {
+    const {
+      data
+    } = await http2.get('/mm-checkpoints')
     return data
   },
 
