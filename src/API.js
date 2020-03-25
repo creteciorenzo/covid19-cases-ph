@@ -14,6 +14,13 @@ export default {
     return data
   },
 
+  async getDthRcvr() {
+    const {
+      data
+    } = await http1.get('/historical/Philippines')
+    return data
+  },
+
   async getSummaryCase() {
     const {
       data

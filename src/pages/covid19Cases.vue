@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="q-pa-md">
+    <div class="q-pa-md" style="height: calc(50vh-50px)">
       <div class="grid-1" style="padding-top:1em ">
         <div class="row-1 case-count">
           <div class="text-h6 text-center fnt-wdth">New Confirmed Cases</div>
@@ -38,8 +38,17 @@
         </div>
       </div>
     </div>
-
-    <lineChart />
+    <div class="q-pa-md">
+      <div class="row justify-center">
+        <div class="col-md-10">
+          <q-card class="chart-card">
+            <q-card-section>
+              <lineChart />
+            </q-card-section>
+          </q-card>
+        </div>
+      </div>
+    </div>
 
     <div class="q-pa-md">
       <div class="row justify-around">

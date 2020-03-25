@@ -1,55 +1,25 @@
 <template>
-  <div>
-    <div class="q-pa-md">
-      <div class="row justify-center">
-        <div class="col-md-10">
-          <div class="chart-card">
-            <!-- <line-chart :chartData="chartdata" :options="chartOptions" /> -->
-            <canvas id="lineChart" width="400" height="400"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="line-chart">
+    <canvas id="lineChart"></canvas>
   </div>
 </template>
-
+<style>
+.line-chart {
+  position: relative;
+  margin: auto;
+  height: 50vh;
+}
+</style>
 <script>
-import LineChart from "./chart.js";
 import axios from "axios";
 import moment from "moment";
 import API from "../API";
 export default {
-  name: "LineChartContainer",
-  components: { LineChart },
-  props: [],
   data() {
     return {
       chartdata: null,
-      loaded: false,
-      chartOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [
-            {
-              id: "dailyCaseAxis",
-              gridLines: {
-                display: true,
-                color: "#728d8b"
-              }
-            }
-          ],
-          xAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: "#728d8b"
-              }
-            }
-          ]
-        }
-      },
       covidCases: [],
+      deathsRecovered: [],
       dateVal: [],
       dtStr: [],
       dailyCase: []
@@ -57,17 +27,40 @@ export default {
   },
   async mounted() {
     this.covidCases = await API.getSummaryCase();
+    this.deathsRecovered = await API.getDthRcvr();
     this.chartData();
     this.dtFormat();
     this.fillData();
+    this.getDeathCount();
   },
 
   methods: {
     fillData() {
       var ctx = document.getElementById("lineChart");
-      console.log(ctx);
       this.chartdata = new Chart(ctx, {
-        options: this.chartOptions,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                id: "dailyCaseAxis",
+                gridLines: {
+                  display: true,
+                  color: "#728d8b"
+                }
+              }
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  color: "#728d8b"
+                }
+              }
+            ]
+          }
+        },
         type: "line",
         data: {
           labels: this.dtStr,
@@ -76,7 +69,7 @@ export default {
               label: "Daily Confirmed Case",
               backgroundColor: "#0092a4a1",
               borderColor: "lightblue",
-              borderWidth: 3,
+              borderWidth: 2,
               pointRadius: 4,
               pointHoverRadius: 6,
               showLine: true,
@@ -96,10 +89,23 @@ export default {
       var count = [];
       dtCombine.forEach(i => {
         const ctgryIndx = categories.indexOf(i);
+
+        //count the duplicate data
         count[ctgryIndx] = (count[ctgryIndx] || 0) + 1;
       });
       this.dailyCase = count;
     },
+    getDeathCount() {
+      var obj = [];
+      var dod = [];
+      const dateCase = this.covidCases.map(d => d.date);
+      const status = this.covidCases.map(s => s.status);
+
+      // let x = status.filter((element, index) => {
+      //   return index % 2 === 0;
+      // });
+    },
+
     dtFormat() {
       for (let i = 0; i < this.dateVal.length; i++) {
         this.dtStr.push(moment(this.dateVal[i]).format("MMM DD YYYY"));
