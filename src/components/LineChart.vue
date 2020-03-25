@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <line-chart :chartData="chartdata" :options="chartOptions" />
+    <line-chart :chartData="chartdata" :options="chartOptions" style="position: relative" />
     <!-- <div>{{xAxis}}</div> -->
   </div>
 </template>
@@ -9,6 +9,7 @@
 import LineChart from "./chart.js";
 import axios from "axios";
 import moment from "moment";
+import API from "../API";
 export default {
   name: "LineChartContainer",
   components: { LineChart },
@@ -18,23 +19,38 @@ export default {
       loaded: false,
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        display: true,
+
+        scales: {
+          yAxes: [
+            {
+              id: "dailyCaseAxis",
+              gridLines: {
+                display: true,
+                color: "#728d8b"
+              }
+            }
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                display: true,
+                color: "#728d8b"
+              }
+            }
+          ]
+        }
       },
       covidCases: [],
       dateVal: [],
-      dtStr: []
+      dtStr: [],
+      dailyCase: []
     };
   },
   async mounted() {
-    await axios
-      .get("https://coronavirus-ph-api.now.sh/cases")
-      .then(res => {
-        let result = res.data;
-        this.covidCases = result;
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    this.covidCases = await API.getSummaryCase();
+
     this.chartData();
     this.dtFormat();
     this.fillData();
@@ -44,11 +60,19 @@ export default {
     fillData() {
       this.chartdata = {
         labels: this.dtStr,
+
         datasets: [
           {
-            label: "My First dataset",
-            backgroundColor: "rgba(75,192,192,0.4)",
-            data: [65, 59, 80, 34]
+            yAxisID: "dailyCaseAxis",
+            label: "Daily Confirmed Case",
+            backgroundColor: "#0092a4",
+            borderColor: "lightblue",
+            borderWidth: 3,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            showLine: true,
+            lineTension: 0,
+            data: this.dailyCase
           }
         ]
       };
@@ -58,10 +82,14 @@ export default {
       const uniqueDt = [...new Set(dtCombine)];
       const categories = uniqueDt.slice(Math.max(uniqueDt.length - 10, 1));
       this.dateVal = categories;
-      var count = 0;
-      dtCombine.forEach(element => {
-        const ctgryIndx = categories.indexOf(element);
+      var count = [];
+      dtCombine.forEach(i => {
+        const ctgryIndx = categories.indexOf(i);
+        count[ctgryIndx] = (count[ctgryIndx] || 0) + 1;
       });
+      this.dailyCase = count;
+
+      this.dailyCase = count;
     },
     dtFormat() {
       for (let i = 0; i < this.dateVal.length; i++) {

@@ -4,19 +4,19 @@
       <div class="grid-1" style="padding-top:1em ">
         <div class="row-1 case-count">
           <div class="text-h6 text-center fnt-wdth">New Confirmed Cases</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{casesToday.todayCases}}</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.todayCases}}</div>
         </div>
         <div class="row-1 case-count">
           <div class="text-h6 text-center fnt-wdth">New Confirmed Deaths</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{casesToday.todayDeaths}}</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.todayDeaths}}</div>
         </div>
         <div class="row-1 case-count">
           <div class="text-h6 text-center fnt-wdth">Serious Cases</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{seriousCase}}</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.critical}}</div>
         </div>
         <div class="row-2 case-count">
           <div class="text-h6 text-center fnt-wdth">Confirmed Cases</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{casesToday.cases}}</div>
+          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.cases}}</div>
         </div>
         <div class="row-2 case-count">
           <div class="text-h6 text-center fnt-wdth">Death Rate</div>
@@ -24,7 +24,7 @@
             {{getFatalityRate}}%
             <span
               class="text-h6 text-center fnt-wdth text-weight-thin"
-            >({{diedStatus.length}})</span>
+            >({{phCases.deaths}})</span>
           </div>
         </div>
         <div class="row-2 case-count">
@@ -39,13 +39,15 @@
       </div>
     </div>
 
-    <!-- <div class="q-pa-md">
+    <div class="q-pa-md">
       <div class="row justify-center">
         <div class="col-md-10">
-          <lineChart />
+          <q-card flat bordered class="chart-card">
+            <lineChart />
+          </q-card>
         </div>
       </div>
-    </div>-->
+    </div>
 
     <div class="q-pa-md">
       <div class="row justify-around">
@@ -270,65 +272,33 @@
 <script>
 import axios from "axios";
 import lineChart from "src/components/LineChart.vue";
+import API from "../API";
 export default {
   components: {
     lineChart
   },
   beforeDestroy() {},
-  mounted() {
-    this.fetchCases();
-    this.fetchTestResult();
-    this.fetchTodayCases();
+  async mounted() {
     this.today = new Date();
     this.year = this.today.getFullYear();
     this.dateToday = this.today.toDateString();
-    this.fetchSeriousCases();
+    this.phCases = await API.phCases();
+    this.summary = await API.getSummaryCase();
+    this.getCases();
+    this.testResult = await API.getTestResults();
   },
 
   methods: {
-    fetchCases() {
-      axios
-        .get("https://coronavirus-ph-api.now.sh/cases")
-        .then(response => {
-          this.summary = response.data;
-          let result = response.data;
-          let date = [];
-          for (let i = 0; i < result.length; i++) {
-            let dt = result[i].date;
-            date.push(dt);
-          }
-          this.dates = date;
-          this.data = this.dates;
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-    fetchTestResult() {
-      axios
-        .get("https://coronavirus-ph-api.now.sh/test-results")
-        .then(response => {
-          this.testResult = response.data;
-        });
+    getCases() {
+      let date = [];
+      for (let i = 0; i < this.summary.length; i++) {
+        let dt = this.summary[i].date;
+        date.push(dt);
+      }
+      this.dates = date;
+      this.data = this.dates;
     },
 
-    fetchTodayCases() {
-      axios
-        .get("https://coronavirus-19-api.herokuapp.com/countries/Philippines")
-        .then(response => {
-          this.casesToday = response.data;
-        });
-    },
-
-    fetchSeriousCases() {
-      axios
-        .get("https://thevirustracker.com/free-api?countryTotal=PH")
-        .then(res => {
-          this.seriousCase = res.data.countrydata[0].total_serious_cases;
-
-          // console.log(res.data.countrydata[0].total_serious_cases);
-        });
-    },
     infoDialog(p) {
       this.fullHeight = true;
       this.caseInfo = p.row;
@@ -336,13 +306,11 @@ export default {
   },
   data() {
     return {
-      seriousCase: null,
+      phCases: [],
       summary: [],
       testResult: [],
       caseInfo: [],
-      casesToday: [],
       fullHeight: false,
-      overall: null,
       today: null,
       year: null,
       dateToday: null,
@@ -420,11 +388,11 @@ export default {
       return this.summary.filter(a => a.age > 60);
     },
     getFatalityRate() {
-      var result = (this.diedStatus.length * 100) / this.summary.length;
+      var result = (this.phCases.deaths * 100) / this.phCases.cases;
       return result.toFixed(2);
     },
     getRecoveryRate() {
-      var result = (this.recoveredStatus.length * 100) / this.summary.length;
+      var result = (this.phCases.recovered * 100) / this.phCases.cases;
       return result.toFixed(2);
     }
   }

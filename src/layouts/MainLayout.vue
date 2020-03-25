@@ -75,13 +75,11 @@
 }
 </style>
 <script>
-import EssentialLink from "components/EssentialLink";
+import moment from "moment";
 export default {
   name: "MainLayout",
 
-  components: {
-    EssentialLink
-  },
+  components: {},
   mounted() {
     this.today = new Date();
   },

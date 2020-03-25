@@ -27,7 +27,7 @@
           </l-circle-marker>
         </l-map>
         <div class="text-subtitle text-grey-13">
-          <span style="text-transform: italic;">Tip:</span>Click the red circle to see the Checkpoint Info
+          <span style="text-transform: italic;">Tip:</span>Click the blue marker to see the Checkpoint Info
         </div>
       </div>
       <q-dialog v-model="isOpen">
@@ -161,8 +161,8 @@ export default {
       isOpen: false,
       ccData: [],
       circle: {
-        radius: 5,
-        color: "red"
+        radius: 4,
+        color: "#0092a4"
       }
     };
   }
