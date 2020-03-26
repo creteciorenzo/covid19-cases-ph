@@ -66,17 +66,7 @@
             <div class="text-h6">Cases by Age Group</div>
           </q-card-section>
           <q-card-section>
-            <bar-chart
-              :label="['Total']"
-              :colors="['#0092a4']"
-              :data="[
-        ['1-17', ageGroup1to17.length],
-        ['18-30', ageGroup18to30.length],
-        ['31-45', ageGroup31to45.length],
-        ['46-60', ageGroup46to60.length],
-        ['60+', ageGroup60plus.length]
-    ]"
-            ></bar-chart>
+            <barChart />
           </q-card-section>
         </q-card>
 
@@ -85,130 +75,21 @@
             <div class="text-h6">Cases by Gender</div>
           </q-card-section>
           <q-card-section>
-            <pie-chart
-              :donut="true"
-              :suffix="['%']"
-              :colors="['#ff7aad','#0170bf']"
-              :data="[
-      ['Female', femaleCase],
-      ['Male', maleCase]
-    ]"
-            ></pie-chart>
+            <pieChart />
           </q-card-section>
         </q-card>
       </div>
     </div>
     <div class="q-pa-md">
-      <q-table
-        title="Summary Cases"
-        :data="summary"
-        :columns="columns"
-        color="primary"
-        row-key="name"
-        class="case-table"
-      >
-        <template v-slot:body-cell-actions="props">
-          <q-td :props="props">
-            <q-btn dense round flat class="tbl-btn" @click="infoDialog(props)" icon="info"></q-btn>
-          </q-td>
-        </template>
-      </q-table>
-
-      <q-dialog v-model="fullHeight" full-height>
-        <q-card class="column full-height dlg" style="width: 700px;">
-          <q-card-section class="row align-center justify-between">
-            <div class="text-h4 dlg-title">Patient Information</div>
-            <q-btn align="right" dense flat icon="close" v-close-popup>
-              <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
-            </q-btn>
-          </q-card-section>
-          <q-card-section class="col q-pt-none">
-            <q-list>
-              <q-item>
-                <q-form class="q-pa-sm">
-                  <label style="padding-right: 10px" class="text-h6 text-weight-regular">Case no:</label>
-                  <span class="text-subtitle1 text-weight-light">{{caseInfo.case_no}}</span>
-                </q-form>
-              </q-item>
-              <q-item>
-                <q-form class="q-pa-sm">
-                  <label style="padding-right: 10px" class="text-h6 text-weight-regular">Date:</label>
-                  <span class="text-subtitle1 text-weight-light">{{caseInfo.date}}</span>
-                </q-form>
-              </q-item>
-              <q-item>
-                <q-form class="q-pa-sm">
-                  <label style="padding-right: 10px" class="text-h6 text-weight-regular">Age:</label>
-                  <span class="text-subtitle1 text-weight-light">{{caseInfo.age}}</span>
-                </q-form>
-              </q-item>
-              <q-item>
-                <q-form class="q-pa-sm">
-                  <label style="padding-right: 10px" class="text-h6 text-weight-regular">Gender:</label>
-                  <span class="text-subtitle1 text-weight-light">{{caseInfo.gender}}</span>
-                </q-form>
-              </q-item>
-              <q-item>
-                <q-form class="q-pa-sm">
-                  <label
-                    style="padding-right: 10px"
-                    class="text-h6 text-weight-regular"
-                  >Nationality:</label>
-                  <span class="text-subtitle1 text-weight-light">{{caseInfo.nationality}}</span>
-                </q-form>
-              </q-item>
-              <q-item>
-                <q-form class="q-pa-sm">
-                  <label
-                    style="padding-right: 10px"
-                    class="text-h6 text-weight-regular"
-                  >Hospital admitted:</label>
-                  <span class="text-subtitle1 text-weight-light">{{caseInfo.hospital_admitted_to}}</span>
-                </q-form>
-              </q-item>
-              <q-item>
-                <q-form class="q-pa-sm">
-                  <label
-                    style="padding-right: 10px"
-                    class="text-h6 text-weight-regular"
-                  >Had recent travel history:</label>
-                  <span
-                    class="text-subtitle1 text-weight-light"
-                  >{{caseInfo.had_recent_travel_history_abroad}}</span>
-                </q-form>
-              </q-item>
-              <q-item>
-                <q-form class="q-pa-sm">
-                  <label style="padding-right: 10px" class="text-h6 text-weight-regular">Status:</label>
-                  <span class="text-subtitle1 text-weight-light">{{caseInfo.status}}</span>
-                </q-form>
-              </q-item>
-              <q-item>
-                <q-form class="q-pa-sm">
-                  <label
-                    style="padding-right: 10px"
-                    class="text-h6 text-weight-regular"
-                  >Other Information:</label>
-                  <span class="text-subtitle1 text-weight-light">{{caseInfo.other_information}}</span>
-                </q-form>
-              </q-item>
-            </q-list>
+      <div class="row justify-center">
+        <q-card flat bordered class="col-md-11 chart-card" style="margin:1em 0; min-width: 300px">
+          <q-card-section>
+            <summaryCases />
           </q-card-section>
         </q-card>
-      </q-dialog>
-    </div>
-    <div class="row justify-center ft" style="height: 100px;">
-      <div class="col-md-10 text-center" style="padding-top: 2em;">
-        <p>
-          &copy; {{year}}
-          <a
-            class="ig-link"
-            href="https://www.instagram.com/xromanticgarbage/"
-            target="_blank"
-          >RENZO R. CRETECIO</a>.
-        </p>
       </div>
     </div>
+    <ft />
   </div>
 </template>
 
@@ -226,16 +107,6 @@
   max-height: 200px;
 }
 
-.ig-link {
-  list-style: none;
-  text-decoration: none;
-  color: #1c1d24;
-}
-.case-table {
-  background-color: #072028;
-  color: #e6e6e6;
-}
-
 .dlg {
   background-color: #0092a4;
   color: #e6e6e6;
@@ -250,20 +121,9 @@
   color: #04c3db;
 }
 
-.ig-link {
-  color: #04c3db;
-}
-.ig-link:hover {
-  text-decoration: underline;
-}
 .case-count {
   color: #04c3db;
   padding: 1em 0;
-}
-
-.ft {
-  background-color: #072028;
-  color: #e6e6e6;
 }
 
 @media screen and (max-width: 30rem) {
@@ -284,19 +144,24 @@
 
 <script>
 import axios from "axios";
-import lineChart from "src/components/LineChart.vue";
-import columnChart from "src/components/ColumnChart";
+import lineChart from "src/components/DailyReport.vue";
+import columnChart from "src/components/PatientStatus";
+import barChart from "src/components/CaseByAgeGroup";
+import pieChart from "src/components/CaseByGender";
+import ft from "src/components/Footer";
+import summaryCases from "src/components/SummaryCase";
 import API from "../API";
 export default {
   components: {
     lineChart,
-    columnChart
+    columnChart,
+    barChart,
+    pieChart,
+    ft,
+    summaryCases
   },
   beforeDestroy() {},
   async mounted() {
-    this.today = new Date();
-    this.year = this.today.getFullYear();
-    this.dateToday = this.today.toDateString();
     this.phCases = await API.phCases();
     this.summary = await API.getSummaryCase();
     this.getCases();
@@ -312,11 +177,6 @@ export default {
       }
       this.dates = date;
       this.data = this.dates;
-    },
-
-    infoDialog(p) {
-      this.fullHeight = true;
-      this.caseInfo = p.row;
     }
   },
   data() {
@@ -329,48 +189,10 @@ export default {
       phCases: [],
       summary: [],
       testResult: [],
-      caseInfo: [],
-      fullHeight: false,
-      today: null,
-      year: null,
-      dateToday: null,
+
       genderF: "",
       genderM: "",
-      columns: [
-        {
-          name: "caseNo",
-          label: "Case no.",
-          field: "case_no",
-          align: "left",
-          sortable: true
-        },
-        {
-          name: "date",
-          label: "Date",
-          field: "date"
-        },
-        {
-          name: "age",
-          label: "Age",
-          field: "age"
-        },
-        {
-          name: "gender",
-          label: "Gender",
-          field: "gender"
-        },
-        {
-          name: "nationality",
-          label: "nationality",
-          field: "nationality"
-        },
-        {
-          name: "status",
-          label: "Status",
-          field: "status"
-        },
-        { name: "actions", label: "More Info", field: "", align: "center" }
-      ],
+
       dataCollection: null,
       chartOptions: {
         responsive: true,
@@ -379,14 +201,6 @@ export default {
     };
   },
   computed: {
-    femaleCase() {
-      var filter = this.summary.filter(c => c.gender === "F");
-      return Math.round((100 * filter.length) / this.phCases.cases);
-    },
-    maleCase() {
-      var filter = this.summary.filter(c => c.gender === "M");
-      return Math.round((100 * filter.length) / this.phCases.cases);
-    },
     diedStatus() {
       return this.summary.filter(s => s.status === "Died");
     },
@@ -395,21 +209,6 @@ export default {
     },
     admittedStatus() {
       return this.summary.filter(s => s.status === "Admitted");
-    },
-    ageGroup1to17() {
-      return this.summary.filter(a => a.age < 18);
-    },
-    ageGroup18to30() {
-      return this.summary.filter(a => a.age >= 18 && a.age <= 30);
-    },
-    ageGroup31to45() {
-      return this.summary.filter(a => a.age >= 31 && a.age <= 45);
-    },
-    ageGroup46to60() {
-      return this.summary.filter(a => a.age >= 46 && a.age < 60);
-    },
-    ageGroup60plus() {
-      return this.summary.filter(a => a.age > 60);
     },
     getFatalityRate() {
       return Math.round((this.phCases.deaths * 100) / this.phCases.cases);

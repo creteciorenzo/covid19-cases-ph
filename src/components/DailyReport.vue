@@ -66,7 +66,7 @@ export default {
           labels: this.dtStr,
           datasets: [
             {
-              label: "Daily Confirmed Case",
+              label: "Total Case",
               backgroundColor: "#0092a4a1",
               borderColor: "lightblue",
               borderWidth: 2,
@@ -84,7 +84,7 @@ export default {
     chartData() {
       const dtCombine = this.covidCases.map(a => a.date).flat(1);
       const uniqueDt = [...new Set(dtCombine)];
-      const categories = uniqueDt.slice(Math.max(uniqueDt.length - 30, 1));
+      const categories = uniqueDt.slice(Math.max(uniqueDt.length - 15, 1));
       this.dateVal = categories;
       var count = [];
       dtCombine.forEach(i => {
