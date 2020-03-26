@@ -27,7 +27,6 @@ export default {
   },
   async mounted() {
     this.covidCases = await API.getSummaryCase();
-    this.phTimeline = await API.getTimeline();
     this.chartData();
     this.dtFormat();
     this.fillData();
@@ -35,7 +34,8 @@ export default {
 
   methods: {
     fillData() {
-      var ctx = document.getElementById("lineChart");
+      var ctx = document.getElementById("lineChart").getContext("2d");
+      console.log(ctx);
       this.chartdata = new Chart(ctx, {
         options: {
           responsive: true,
@@ -88,11 +88,11 @@ export default {
       var count = [];
       dtCombine.forEach(i => {
         const ctgryIndx = categories.indexOf(i);
-
         //count the duplicate data
         count[ctgryIndx] = (count[ctgryIndx] || 0) + 1;
       });
       this.dailyCase = count;
+      console.log(this.dailyCase);
     },
 
     dtFormat() {

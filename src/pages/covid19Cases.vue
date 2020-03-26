@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-bg">
     <div class="q-pa-md" style="height: calc(50vh-50px)">
       <div class="grid-1" style="padding-top:1em ">
         <div class="row-1 case-count">
