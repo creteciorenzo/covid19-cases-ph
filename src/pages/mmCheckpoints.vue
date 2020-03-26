@@ -138,7 +138,7 @@ export default {
       mapOptions: {
         zoomSnap: 0.5
       },
-      icon: require("src/assets/marker.png"),
+      icon: require("src/assets/marker-3.png"),
       iconSize: [16, 16],
       isOpen: false,
       ccData: [],
