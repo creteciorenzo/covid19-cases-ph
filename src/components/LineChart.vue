@@ -35,7 +35,6 @@ export default {
   methods: {
     fillData() {
       var ctx = document.getElementById("lineChart").getContext("2d");
-      console.log(ctx);
       this.chartdata = new Chart(ctx, {
         options: {
           responsive: true,
@@ -92,7 +91,6 @@ export default {
         count[ctgryIndx] = (count[ctgryIndx] || 0) + 1;
       });
       this.dailyCase = count;
-      console.log(this.dailyCase);
     },
 
     dtFormat() {

@@ -3,11 +3,11 @@
     <div class="q-pa-md" style="height: calc(50vh-50px)">
       <div class="grid-1" style="padding-top:1em ">
         <div class="row-1 case-count">
-          <div class="text-h6 text-center fnt-wdth">New Confirmed Cases</div>
+          <div class="text-h6 text-center fnt-wdth">New Cases</div>
           <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.todayCases}}</div>
         </div>
         <div class="row-1 case-count">
-          <div class="text-h6 text-center fnt-wdth">New Confirmed Deaths</div>
+          <div class="text-h6 text-center fnt-wdth">New Deaths</div>
           <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.todayDeaths}}</div>
         </div>
         <div class="row-1 case-count">
@@ -15,7 +15,7 @@
           <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.critical}}</div>
         </div>
         <div class="row-2 case-count">
-          <div class="text-h6 text-center fnt-wdth">Confirmed Cases</div>
+          <div class="text-h6 text-center fnt-wdth">Total Cases</div>
           <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.cases}}</div>
         </div>
         <div class="row-2 case-count">
@@ -58,6 +58,8 @@
           </q-card-section>
           <q-card-section>
             <bar-chart
+              :label="['Total']"
+              :colors="['#0092a4']"
               :data="[
         ['1-17', ageGroup1to17.length],
         ['18-30', ageGroup18to30.length],
@@ -76,10 +78,11 @@
           <q-card-section>
             <pie-chart
               :donut="true"
+              :suffix="['%']"
               :colors="['#ff7aad','#0170bf']"
               :data="[
-      ['Female', femaleCase.length],
-      ['Male', maleCase.length]
+      ['Female', femaleCase],
+      ['Male', maleCase]
     ]"
             ></pie-chart>
           </q-card-section>
@@ -307,6 +310,11 @@ export default {
   },
   data() {
     return {
+      age1to17: null,
+      age18to30: null,
+      age31to45: null,
+      age45to60: null,
+      age60: null,
       phCases: [],
       summary: [],
       testResult: [],
@@ -359,10 +367,12 @@ export default {
   },
   computed: {
     femaleCase() {
-      return this.summary.filter(c => c.gender === "F");
+      var filter = this.summary.filter(c => c.gender === "F");
+      return Math.round((100 * filter.length) / this.phCases.cases) + "%";
     },
     maleCase() {
-      return this.summary.filter(c => c.gender === "M");
+      var filter = this.summary.filter(c => c.gender === "M");
+      return Math.round((100 * filter.length) / this.phCases.cases);
     },
     diedStatus() {
       return this.summary.filter(s => s.status === "Died");
@@ -389,12 +399,10 @@ export default {
       return this.summary.filter(a => a.age > 60);
     },
     getFatalityRate() {
-      var result = (this.phCases.deaths * 100) / this.phCases.cases;
-      return result.toFixed(2);
+      return Math.round((this.phCases.deaths * 100) / this.phCases.cases);
     },
     getRecoveryRate() {
-      var result = (this.phCases.recovered * 100) / this.phCases.cases;
-      return result.toFixed(2);
+      return Math.round((this.phCases.recovered * 100) / this.phCases.cases);
     }
   }
 };
