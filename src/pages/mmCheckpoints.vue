@@ -13,7 +13,9 @@
         :options="mapOptions"
         style="height: 75vh; min-width: 320px"
       >
-        <l-tile-layer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
+        <l-tile-layer
+          url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+        />
         <l-circle-marker
           v-for="(c, i) in checkPoints"
           :key="i"
