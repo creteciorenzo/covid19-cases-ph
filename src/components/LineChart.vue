@@ -39,10 +39,12 @@ export default {
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          legend: {
+            position: "bottom"
+          },
           scales: {
             yAxes: [
               {
-                id: "dailyCaseAxis",
                 gridLines: {
                   display: true,
                   color: "#728d8b"

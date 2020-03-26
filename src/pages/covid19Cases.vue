@@ -40,16 +40,22 @@
     </div>
     <div class="q-pa-md">
       <div class="row justify-around">
-        <q-card class="chart-card col-md-10" style="margin:1em 0; min-width: 300px">
+        <q-card class="chart-card col-md-5" style="margin:1em 0; min-width: 300px">
+          <q-card-section>
+            <div class="text-h6">Confirmed Cases Daily</div>
+          </q-card-section>
           <q-card-section>
             <lineChart />
           </q-card-section>
         </q-card>
-        <!-- <q-card class="chart-card col-md-5" style="margin:1em 0; min-width: 300px">
+        <q-card class="chart-card col-md-5" style="margin:1em 0; min-width: 300px">
+          <q-card-section>
+            <div class="text-h6">Patient Status Count</div>
+          </q-card-section>
           <q-card-section>
             <columnChart />
           </q-card-section>
-        </q-card>-->
+        </q-card>
       </div>
     </div>
 
@@ -199,7 +205,7 @@
             class="ig-link"
             href="https://www.instagram.com/xromanticgarbage/"
             target="_blank"
-          >RENZO R. CRETECIO</a>. All Rights Reserve
+          >RENZO R. CRETECIO</a>.
         </p>
       </div>
     </div>
@@ -328,6 +334,8 @@ export default {
       today: null,
       year: null,
       dateToday: null,
+      genderF: "",
+      genderM: "",
       columns: [
         {
           name: "caseNo",
@@ -373,7 +381,7 @@ export default {
   computed: {
     femaleCase() {
       var filter = this.summary.filter(c => c.gender === "F");
-      return Math.round((100 * filter.length) / this.phCases.cases) + "%";
+      return Math.round((100 * filter.length) / this.phCases.cases);
     },
     maleCase() {
       var filter = this.summary.filter(c => c.gender === "M");
