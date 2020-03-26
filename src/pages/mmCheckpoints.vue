@@ -14,9 +14,7 @@
           :options="mapOptions"
           style="height: 75vh; min-width: 320px"
         >
-          <l-tile-layer
-            url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-          />
+          <l-tile-layer :url="urlMap" />
           <l-marker
             v-for="(c, i) in checkPoints"
             :key="i"
@@ -133,11 +131,13 @@ export default {
   data() {
     return {
       checkPoints: [],
-      zoom: 11,
+      zoom: 12,
       center: [14.6091, 121.0223],
       mapOptions: {
         zoomSnap: 0.5
       },
+      urlMap:
+        "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png",
       icon: require("src/assets/marker-3.png"),
       iconSize: [16, 16],
       isOpen: false,
