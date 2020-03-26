@@ -33,20 +33,23 @@
             {{getRecoveryRate}}%
             <span
               class="text-h6 text-center fnt-wdth text-weight-thin"
-            >({{recoveredStatus.length}})</span>
+            >({{phCases.recovered}})</span>
           </div>
         </div>
       </div>
     </div>
     <div class="q-pa-md">
-      <div class="row justify-center">
-        <div class="col-md-10">
-          <q-card class="chart-card">
-            <q-card-section>
-              <lineChart />
-            </q-card-section>
-          </q-card>
-        </div>
+      <div class="row justify-around">
+        <q-card class="chart-card col-md-10" style="margin:1em 0; min-width: 300px">
+          <q-card-section>
+            <lineChart />
+          </q-card-section>
+        </q-card>
+        <!-- <q-card class="chart-card col-md-5" style="margin:1em 0; min-width: 300px">
+          <q-card-section>
+            <columnChart />
+          </q-card-section>
+        </q-card>-->
       </div>
     </div>
 
@@ -276,10 +279,12 @@
 <script>
 import axios from "axios";
 import lineChart from "src/components/LineChart.vue";
+import columnChart from "src/components/ColumnChart";
 import API from "../API";
 export default {
   components: {
-    lineChart
+    lineChart,
+    columnChart
   },
   beforeDestroy() {},
   async mounted() {
@@ -393,7 +398,7 @@ export default {
       return this.summary.filter(a => a.age >= 31 && a.age <= 45);
     },
     ageGroup46to60() {
-      return this.summary.filter(a => a.age >= 46 && a.age <= 60);
+      return this.summary.filter(a => a.age >= 46 && a.age < 60);
     },
     ageGroup60plus() {
       return this.summary.filter(a => a.age > 60);

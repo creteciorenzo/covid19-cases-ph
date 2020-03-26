@@ -68,8 +68,8 @@ export default {
               backgroundColor: "#0092a4a1",
               borderColor: "lightblue",
               borderWidth: 2,
-              pointRadius: 4,
-              pointHoverRadius: 6,
+              pointRadius: 5,
+              pointHoverRadius: 8,
               showLine: true,
               lineTension: 0,
               data: this.dailyCase
@@ -82,7 +82,7 @@ export default {
     chartData() {
       const dtCombine = this.covidCases.map(a => a.date).flat(1);
       const uniqueDt = [...new Set(dtCombine)];
-      const categories = uniqueDt.slice(Math.max(uniqueDt.length - 10, 1));
+      const categories = uniqueDt.slice(Math.max(uniqueDt.length - 30, 1));
       this.dateVal = categories;
       var count = [];
       dtCombine.forEach(i => {
