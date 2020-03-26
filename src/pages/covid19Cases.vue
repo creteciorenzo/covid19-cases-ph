@@ -186,12 +186,16 @@ export default {
       age31to45: null,
       age45to60: null,
       age60: null,
+
       phCases: [],
       summary: [],
       testResult: [],
 
       genderF: "",
       genderM: "",
+
+      deathCount: null,
+      recoveredCount: null,
 
       dataCollection: null,
       chartOptions: {
@@ -201,20 +205,17 @@ export default {
     };
   },
   computed: {
-    diedStatus() {
-      return this.summary.filter(s => s.status === "Died");
-    },
-    recoveredStatus() {
-      return this.summary.filter(s => s.status === "Recovered");
-    },
-    admittedStatus() {
-      return this.summary.filter(s => s.status === "Admitted");
-    },
     getFatalityRate() {
-      return Math.round((this.phCases.deaths * 100) / this.phCases.cases);
+      this.deathCount = this.summary.filter(dc => dc.status === "Died");
+      return Math.round((this.deathCount.length * 100) / this.summary.length);
     },
     getRecoveryRate() {
-      return Math.round((this.phCases.recovered * 100) / this.phCases.cases);
+      this.recoveredCount = this.summary.filter(
+        dc => dc.status === "Recovered"
+      );
+      return Math.round(
+        (this.recoveredCount.length * 100) / this.summary.length
+      );
     }
   }
 };

@@ -14,7 +14,6 @@
 import API from "../API";
 export default {
   async mounted() {
-    this.phCases = await API.phCases();
     this.summary = await API.getSummaryCase();
   },
 
@@ -27,11 +26,11 @@ export default {
   computed: {
     femaleCase() {
       var filter = this.summary.filter(c => c.gender === "F");
-      return Math.round((100 * filter.length) / this.phCases.cases);
+      return Math.round((100 * filter.length) / this.summary.length);
     },
     maleCase() {
       var filter = this.summary.filter(c => c.gender === "M");
-      return Math.round((100 * filter.length) / this.phCases.cases);
+      return Math.round((100 * filter.length) / this.summary.length);
     }
   }
 };
