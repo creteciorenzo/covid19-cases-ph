@@ -16,7 +16,7 @@
           <span>PH</span> Covid-19 Cases
         </q-toolbar-title>
 
-        <div class="text-h6 text-weight-regular" style="color: #e6e6e6">As of {{date}}</div>
+        <div class="text-h6 text-weight-regular hide" style="color: #e6e6e6">As of {{date}}</div>
       </q-toolbar>
     </q-header>
 
@@ -71,6 +71,11 @@
   background-image: linear-gradient(to bottom, #072028, #0092a4);
   margin: 0;
   padding: 0;
+}
+@media screen and (max-width: 30rem) {
+  .hide {
+    display: none;
+  }
 }
 </style>
 <script>

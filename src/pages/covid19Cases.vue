@@ -4,6 +4,7 @@
       <div class="row justify-center">
         <div class="col-md-11">
           <q-card style="background-color: #072028; text-align: center">
+            <q-card-title class="text-h4 case-title show" style="color: #e6e6e6">As of {{today}}</q-card-title>
             <q-card-section>
               <div class="row justify-center">
                 <div class="col-md-11">
@@ -181,9 +182,15 @@
   background-color: #e6e6e6;
   width: 300px;
 }
-
+.show {
+  display: none;
+}
 @media screen and (max-width: 30rem) {
   .fnt-wdth {
+    font-size: 6vw;
+  }
+  .show {
+    display: block;
     font-size: 6vw;
   }
 }
