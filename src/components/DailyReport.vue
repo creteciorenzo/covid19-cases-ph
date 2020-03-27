@@ -22,7 +22,9 @@ export default {
       phTimeline: [],
       dateVal: [],
       dtStr: [],
-      dailyCase: []
+      dailyCase: [],
+      date: null,
+      caseDate: null
     };
   },
   async mounted() {
@@ -30,6 +32,8 @@ export default {
     this.chartData();
     this.dtFormat();
     this.fillData();
+    this.date = new Date();
+    this.caseDate = moment(this.date).format("YYYY-MM-DD");
   },
 
   methods: {
@@ -97,7 +101,12 @@ export default {
 
     dtFormat() {
       for (let i = 0; i < this.dateVal.length; i++) {
-        this.dtStr.push(moment(this.dateVal[i]).format("MMM DD YYYY"));
+        // if (this.dateVal[i] === "TBA") {
+        //   this.dtStr.push(moment(this.date).format("MMM DD, YYYY"));
+        // } else {
+        //   this.dtStr.push(moment(this.dateVal[i]).format("MMM DD, YYYY"));
+        // }
+        this.dtStr.push(moment(this.dateVal[i]).format("MMM DD, YYYY"));
       }
     }
   },

@@ -15,6 +15,8 @@
         <q-toolbar-title class="bt-title">
           <span>PH</span> Covid-19 Cases
         </q-toolbar-title>
+
+        <div class="text-h6 text-weight-regular" style="color: #e6e6e6">As of {{date}}</div>
       </q-toolbar>
     </q-header>
 
@@ -79,12 +81,14 @@ export default {
   components: {},
   mounted() {
     this.today = new Date();
+    this.date = moment(this.today).format("MMM DD, YYYY");
   },
 
   data() {
     return {
       leftDrawerOpen: false,
-      today: null
+      today: null,
+      date: null
     };
   },
   methods: {},

@@ -4,7 +4,6 @@
       <div class="row justify-center">
         <div class="col-md-11">
           <q-card style="background-color: #072028; text-align: center">
-            <q-card-title class="text-h4" style="color: #e6e6e6">As of {{today}}</q-card-title>
             <q-card-section>
               <div class="row justify-center">
                 <div class="col-md-11">
