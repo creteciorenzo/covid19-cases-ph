@@ -136,7 +136,8 @@ export default {
       mapOptions: {
         zoomSnap: 0.5
       },
-      urlMap: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+      urlMap:
+        "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png",
       icon: require("src/assets/marker-3.png"),
       iconSize: [16, 16],
       isOpen: false,
