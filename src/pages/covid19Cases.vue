@@ -4,7 +4,7 @@
       <div class="row justify-center">
         <div class="col-md-11">
           <q-card style="background-color: #072028; text-align: center">
-            <q-card-title class="text-h4 case-title show" style="color: #e6e6e6">As of {{today}}</q-card-title>
+            <q-card-section class="text-h4 case-title show" style="color: #e6e6e6">As of {{today}}</q-card-section>
             <q-card-section>
               <div class="row justify-center">
                 <div class="col-md-11">
@@ -133,6 +133,11 @@
             <summaryCases />
           </q-card-section>
         </q-card>
+        <!-- <q-card class="col-md-6" flat bordered style="min-width: 300px; background-color: #072028">
+          <q-card-section>
+            <byHealthFacility />
+          </q-card-section>
+        </q-card>-->
       </div>
     </div>
     <ft />
@@ -206,6 +211,7 @@ import barChart from "src/components/CaseByAgeGroup";
 import pieChart from "src/components/CaseByGender";
 import ft from "src/components/Footer";
 import summaryCases from "src/components/SummaryCase";
+import byHealthFacility from "src/components/CaseByHealthFacility";
 import API from "../API";
 import moment from "moment";
 export default {
@@ -215,29 +221,19 @@ export default {
     barChart,
     pieChart,
     ft,
-    summaryCases
+    summaryCases,
+    byHealthFacility
   },
   beforeDestroy() {},
   async mounted() {
     this.phCases = await API.phCases();
     this.summary = await API.getSummaryCase();
-    this.getCases();
     this.testResult = await API.getTestResults();
     this.date = new Date();
     this.today = moment(this.date).format("MMM DD, YYYY");
   },
 
-  methods: {
-    getCases() {
-      let date = [];
-      for (let i = 0; i < this.summary.length; i++) {
-        let dt = this.summary[i].date;
-        date.push(dt);
-      }
-      this.dates = date;
-      this.data = this.dates;
-    }
-  },
+  methods: {},
   data() {
     return {
       age1to17: null,
