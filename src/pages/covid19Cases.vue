@@ -1,43 +1,89 @@
 <template>
   <div class="main-bg">
     <div class="q-pa-md" style="height: calc(50vh-50px)">
-      <div class="grid-1" style="padding-top:1em ">
-        <div class="row-1 case-count">
-          <div class="text-h6 text-center fnt-wdth">New Cases</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.todayCases}}</div>
-        </div>
-        <div class="row-1 case-count">
-          <div class="text-h6 text-center fnt-wdth">New Deaths</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.todayDeaths}}</div>
-        </div>
-        <div class="row-1 case-count">
-          <div class="text-h6 text-center fnt-wdth">Serious Cases</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.critical}}</div>
-        </div>
-        <div class="row-2 case-count">
-          <div class="text-h6 text-center fnt-wdth">Total Cases</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">{{phCases.cases}}</div>
-        </div>
-        <div class="row-2 case-count">
-          <div class="text-h6 text-center fnt-wdth">Death Rate</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">
-            {{getFatalityRate}}%
-            <span
-              class="text-h6 text-center fnt-wdth text-weight-thin"
-            >({{phCases.deaths}})</span>
-          </div>
-        </div>
-        <div class="row-2 case-count">
-          <div class="text-h6 text-center fnt-wdth">Recovery Rate</div>
-          <div class="text-h6 text-center fnt-wdth text-weight-thin">
-            {{getRecoveryRate}}%
-            <span
-              class="text-h6 text-center fnt-wdth text-weight-thin"
-            >({{phCases.recovered}})</span>
-          </div>
+      <div class="row justify-center">
+        <div class="col-md-11">
+          <q-card style="background-color: #072028; text-align: center">
+            <q-card-title class="text-h4" style="color: #e6e6e6">As of {{today}}</q-card-title>
+            <q-card-section>
+              <div class="row justify-center">
+                <div class="col-md-11">
+                  <div class="row justify-center">
+                    <div class="case-count">
+                      <q-card class="case-card" style="border-left: 1em #ff5a1f solid">
+                        <q-card-section>
+                          <div class="text-h6 text-center fnt-wdth">New Cases</div>
+                          <div
+                            class="text-h4 text-center fnt-wdth text-weight-thin"
+                          >{{phCases.todayCases}}</div>
+                        </q-card-section>
+                      </q-card>
+                    </div>
+                    <div class="case-count">
+                      <q-card class="case-card" style="border-left: 1em #f05252 solid">
+                        <q-card-section>
+                          <div class="text-h6 text-center fnt-wdth">New Deaths</div>
+                          <div
+                            class="text-h4 text-center fnt-wdth text-weight-thin"
+                          >{{phCases.todayDeaths}}</div>
+                        </q-card-section>
+                      </q-card>
+                    </div>
+                    <div class="case-count">
+                      <q-card class="case-card" style="border-left: 1em #607d8b solid">
+                        <q-card-section>
+                          <div class="text-h6 text-center fnt-wdth">Serious Cases</div>
+                          <div
+                            class="text-h4 text-center fnt-wdth text-weight-thin"
+                          >{{phCases.critical}}</div>
+                        </q-card-section>
+                      </q-card>
+                    </div>
+                    <div class="case-count">
+                      <q-card class="case-card" style="border-left: 1em #3949ab solid">
+                        <q-card-section>
+                          <div class="text-h6 text-center fnt-wdth">Total Cases</div>
+                          <div
+                            class="text-h4 text-center fnt-wdth text-weight-thin"
+                          >{{phCases.cases}}</div>
+                        </q-card-section>
+                      </q-card>
+                    </div>
+                    <div class="case-count">
+                      <q-card class="case-card" style="border-left: 1em #d50000 solid">
+                        <q-card-section>
+                          <div class="text-h6 text-center fnt-wdth">Death Rate</div>
+                          <div class="text-h4 text-center fnt-wdth text-weight-thin">
+                            {{getFatalityRate}}%
+                            <span
+                              class="text-h4 text-center fnt-wdth text-weight-thin"
+                            >({{phCases.deaths}})</span>
+                          </div>
+                        </q-card-section>
+                      </q-card>
+                    </div>
+                    <div class="case-count">
+                      <q-card class="case-card" style="border-left: 1em #00c853 solid">
+                        <q-card-section>
+                          <div class="text-h6 text-center fnt-wdth">Recovery Rate</div>
+                          <div class="text-h4 text-center fnt-wdth text-weight-thin">
+                            {{getRecoveryRate}}%
+                            <span
+                              class="text-h4 text-center fnt-wdth text-weight-thin"
+                            >({{phCases.recovered}})</span>
+                          </div>
+                        </q-card-section>
+                      </q-card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </q-card-section>
+          </q-card>
         </div>
       </div>
     </div>
+
     <div class="q-pa-md">
       <div class="row justify-around">
         <q-card class="chart-card col-md-5" style="margin:1em 0; min-width: 300px">
@@ -82,7 +128,7 @@
     </div>
     <div class="q-pa-md">
       <div class="row justify-center">
-        <q-card flat bordered class="col-md-11 chart-card" style="margin:1em 0; min-width: 300px">
+        <q-card class="col-md-11" flat bordered style="min-width: 300px; background-color: #072028">
           <q-card-section>
             <summaryCases />
           </q-card-section>
@@ -101,10 +147,16 @@
 .grid-1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  padding-top: 1.5em;
+  background-color: #072028;
+  width: 90%;
+  margin: auto;
+  border-radius: 8px;
 }
 
-.canvas {
-  max-height: 200px;
+.row-1 {
+  width: 300px;
+  margin: 0 auto;
 }
 
 .dlg {
@@ -122,23 +174,21 @@
 }
 
 .case-count {
-  color: #04c3db;
+  color: #072028;
   padding: 1em 0;
+  margin: 0 auto;
+}
+.case-card {
+  background-color: #e6e6e6;
+  width: 300px;
 }
 
 @media screen and (max-width: 30rem) {
-  .dlg-title {
-    font-size: 6vw;
-  }
-
   .fnt-wdth {
-    font-size: 4vw;
+    font-size: 6vw;
   }
 }
 @media only screen and (max-width: 48rem) {
-  .grid-1 {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 </style>
 
@@ -151,6 +201,7 @@ import pieChart from "src/components/CaseByGender";
 import ft from "src/components/Footer";
 import summaryCases from "src/components/SummaryCase";
 import API from "../API";
+import moment from "moment";
 export default {
   components: {
     lineChart,
@@ -166,6 +217,8 @@ export default {
     this.summary = await API.getSummaryCase();
     this.getCases();
     this.testResult = await API.getTestResults();
+    this.date = new Date();
+    this.today = moment(this.date).format("MMM DD, YYYY");
   },
 
   methods: {
@@ -186,6 +239,9 @@ export default {
       age31to45: null,
       age45to60: null,
       age60: null,
+
+      date: null,
+      today: null,
 
       phCases: [],
       summary: [],

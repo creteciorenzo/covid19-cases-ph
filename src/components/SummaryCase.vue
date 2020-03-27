@@ -14,6 +14,7 @@
         </q-td>
       </template>
     </q-table>
+
     <q-dialog v-model="fullHeight" full-height>
       <q-card class="column full-height dlg" style="width: 700px;">
         <q-card-section class="row align-center justify-between">
