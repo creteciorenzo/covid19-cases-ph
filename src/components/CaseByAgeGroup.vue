@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     ageGroup1to17() {
-      return this.summary.filter(a => a.age < 18);
+      return this.summary.filter(a => a.age >= 1 && a.age <= 17);
     },
     ageGroup18to30() {
       return this.summary.filter(a => a.age >= 18 && a.age <= 30);
