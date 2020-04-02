@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="q-pa-md">
-      <div class="row justify-around">
+      <div class="row justify-center">
         <q-card
           class="col-md-5 spacing"
           flat
@@ -12,13 +12,8 @@
             <byHealthFacility />
           </q-card-section>
         </q-card>
-        <div class="col-md-5 spacing">
-          <l-map
-            :zoom="zoom"
-            :center="center"
-            :options="mapOptions"
-            style="height: 75vh; min-width: 320px"
-          >
+        <q-card class="col-md-5 spacing">
+          <l-map :zoom="zoom" :center="center" :options="mapOptions" style="height: 75vh;">
             <l-tile-layer :url="urlMap" />
             <l-marker
               v-for="(f, i) in summary"
@@ -66,7 +61,7 @@
               </q-card-section>
             </q-card>
           </q-dialog>
-        </div>
+        </q-card>
       </div>
     </div>
     <ft />
@@ -147,5 +142,10 @@ export default {
 .dlg {
   background-color: #0092a4;
   color: #e6e6e6;
+}
+
+.spacing {
+  margin: 1em;
+  width: 100%;
 }
 </style>
