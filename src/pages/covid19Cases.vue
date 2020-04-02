@@ -132,7 +132,7 @@
           <q-card-section>
             <summaryCases />
           </q-card-section>
-        </q-card>c
+        </q-card>
       </div>
     </div>
     <ft />
