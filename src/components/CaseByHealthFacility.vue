@@ -23,14 +23,14 @@ export default {
       columns: [
         {
           name: "facility",
-          label: "Facility",
+          label: "FACILITY",
           field: "facility",
           align: "left",
           sortable: true
         },
         {
           name: "casesCount",
-          label: "Confirmed",
+          label: "CONFIRMED",
           align: "left",
           field: "confirmed_cases"
         },
@@ -42,7 +42,7 @@ export default {
         },
         {
           name: "region",
-          label: "Region",
+          label: "REGION",
           align: "left",
           field: "region"
         }
