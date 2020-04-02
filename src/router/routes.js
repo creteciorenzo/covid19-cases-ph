@@ -6,6 +6,10 @@ const routes = [{
         component: () => import('pages/covid19Cases')
       },
       {
+        path: 'facility',
+        component: () => import('pages/Facility.vue')
+      },
+      {
         path: 'checkpoints',
         component: () => import('pages/mmCheckpoints.vue')
       }

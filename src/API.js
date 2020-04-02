@@ -4,7 +4,7 @@ const http1 = axios.create({
   baseURL: 'https://corona.lmao.ninja'
 });
 const http2 = axios.create({
-  baseURL: 'https://coronavirus-ph-api.now.sh'
+  baseURL: 'https://coronavirus-ph-api.herokuapp.com'
 });
 export default {
   async phCases() {
@@ -39,6 +39,13 @@ export default {
     const {
       data
     } = await http2.get('/test-results')
+    return data
+  },
+
+  async getFacilities() {
+    const {
+      data
+    } = await http2.get('/facilities')
     return data
   }
 }

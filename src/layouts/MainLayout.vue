@@ -27,6 +27,11 @@
             <q-item-section class="text-h6 text-weight-thin">Covid-19 Data</q-item-section>
           </q-item>
         </router-link>
+        <router-link class="link" to="/facility">
+          <q-item clickable v-ripple>
+            <q-item-section class="text-h6 text-weight-thin">Cases by Health Facility Map</q-item-section>
+          </q-item>
+        </router-link>
         <router-link class="link" to="/checkpoints">
           <q-item clickable v-ripple>
             <q-item-section class="text-h6 text-weight-thin">Metro Manila Checkpoints</q-item-section>

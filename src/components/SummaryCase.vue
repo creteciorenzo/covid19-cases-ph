@@ -70,9 +70,7 @@
                   style="padding-right: 10px"
                   class="text-h6 text-weight-regular"
                 >Had recent travel history:</label>
-                <span
-                  class="text-subtitle1 text-weight-light"
-                >{{caseInfo.had_recent_travel_history_abroad}}</span>
+                <span class="text-subtitle1 text-weight-light">{{caseInfo.travel_history}}</span>
               </q-form>
             </q-item>
             <q-item>
@@ -83,11 +81,8 @@
             </q-item>
             <q-item>
               <q-form class="q-pa-sm">
-                <label
-                  style="padding-right: 10px"
-                  class="text-h6 text-weight-regular"
-                >Other Information:</label>
-                <span class="text-subtitle1 text-weight-light">{{caseInfo.other_information}}</span>
+                <label style="padding-right: 10px" class="text-h6 text-weight-regular">Resident of:</label>
+                <span class="text-subtitle1 text-weight-light">{{caseInfo.resident_of}}</span>
               </q-form>
             </q-item>
           </q-list>

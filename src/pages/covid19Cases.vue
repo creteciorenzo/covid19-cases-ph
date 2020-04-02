@@ -45,7 +45,7 @@
                           <div class="text-h6 text-center fnt-wdth">Total Cases</div>
                           <div
                             class="text-h4 text-center fnt-wdth text-weight-thin"
-                          >{{phCases.cases}}</div>
+                          >{{summary.length}}</div>
                         </q-card-section>
                       </q-card>
                     </div>
@@ -132,12 +132,7 @@
           <q-card-section>
             <summaryCases />
           </q-card-section>
-        </q-card>
-        <!-- <q-card class="col-md-6" flat bordered style="min-width: 300px; background-color: #072028">
-          <q-card-section>
-            <byHealthFacility />
-          </q-card-section>
-        </q-card>-->
+        </q-card>c
       </div>
     </div>
     <ft />

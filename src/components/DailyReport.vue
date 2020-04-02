@@ -88,12 +88,13 @@ export default {
     chartData() {
       const dtCombine = this.covidCases.map(a => a.date).flat(1);
       const uniqueDt = [...new Set(dtCombine)];
-      const categories = uniqueDt.slice(Math.max(uniqueDt.length - 15, 1));
+      const categories = uniqueDt.slice(Math.max(uniqueDt.length - 10, 1));
       this.dateVal = categories;
       var count = [];
       dtCombine.forEach(i => {
         const ctgryIndx = categories.indexOf(i);
         //count the duplicate data
+
         count[ctgryIndx] = (count[ctgryIndx] || 0) + 1;
       });
       this.dailyCase = count;
@@ -101,11 +102,6 @@ export default {
 
     dtFormat() {
       for (let i = 0; i < this.dateVal.length; i++) {
-        // if (this.dateVal[i] === "TBA") {
-        //   this.dtStr.push(moment(this.date).format("MMM DD, YYYY"));
-        // } else {
-        //   this.dtStr.push(moment(this.dateVal[i]).format("MMM DD, YYYY"));
-        // }
         this.dtStr.push(moment(this.dateVal[i]).format("MMM DD, YYYY"));
       }
     }

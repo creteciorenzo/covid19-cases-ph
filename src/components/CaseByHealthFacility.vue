@@ -1,12 +1,12 @@
 <template>
   <div>
-    <q-table title="Cases By Health Facility" :columns="columns" row-key="name" class="case-table">
-      <template v-slot:body-cell-actions="props">
-        <q-td :props="props">
-          <q-btn dense round flat class="tbl-btn" @click="infoDialog(props)" icon="info" />
-        </q-td>
-      </template>
-    </q-table>
+    <q-table
+      :data="summary"
+      title="Cases By Health Facility"
+      :columns="columns"
+      row-key="name"
+      class="case-table"
+    ></q-table>
   </div>
 </template>
 
@@ -14,9 +14,9 @@
 import API from "../API";
 export default {
   async mounted() {
-    this.summary = await API.getSummaryCase();
-    this.getFacility();
+    this.summary = await API.getFacilities();
   },
+
   data() {
     return {
       summary: [],
@@ -24,37 +24,40 @@ export default {
         {
           name: "facility",
           label: "Facility",
-          field: "hospital_admitted_to",
+          field: "facility",
           align: "left",
           sortable: true
         },
         {
-          name: "patientCount",
-          label: "Count",
-          field: "patientCount"
+          name: "casesCount",
+          label: "Confirmed",
+          align: "left",
+          field: "confirmed_cases"
+        },
+        {
+          name: "puiCount",
+          label: "PUIs",
+          align: "left",
+          field: "puis"
+        },
+        {
+          name: "region",
+          label: "Region",
+          align: "left",
+          field: "region"
         }
       ],
       facilityCount: []
     };
   },
-  methods: {
-    getFacility() {
-      var obj = {
-        facility: null,
-        count: null
-      };
-      var count = [];
-      const hospital = this.summary.map(f => f.hospital_admitted_to).flat(1);
-      const unqHospital = [...new Set(hospital)];
-      hospital.forEach(element => {
-        const index = unqHospital.indexOf(element);
-        count[index] = (count[index] || 0) + 1;
-      });
-
-      console.log(unqHospital);
-      console.log(count);
-    }
-  },
+  methods: {},
   computed: {}
 };
 </script>
+
+<style>
+.case-table {
+  background-color: #072028;
+  color: #e6e6e6;
+}
+</style>
