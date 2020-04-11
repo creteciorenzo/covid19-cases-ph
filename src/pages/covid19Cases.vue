@@ -52,26 +52,20 @@
                     <div class="case-count">
                       <q-card class="case-card" style="border-left: 1em #d50000 solid">
                         <q-card-section>
-                          <div class="text-h6 text-center fnt-wdth">Death Rate</div>
-                          <div class="text-h4 text-center fnt-wdth text-weight-thin">
-                            {{getFatalityRate}}%
-                            <span
-                              class="text-h4 text-center fnt-wdth text-weight-thin"
-                            >({{phCases.deaths}})</span>
-                          </div>
+                          <div class="text-h6 text-center fnt-wdth">Deaths</div>
+                          <div
+                            class="text-h4 text-center fnt-wdth text-weight-thin"
+                          >{{phCases.deaths}}</div>
                         </q-card-section>
                       </q-card>
                     </div>
                     <div class="case-count">
                       <q-card class="case-card" style="border-left: 1em #00c853 solid">
                         <q-card-section>
-                          <div class="text-h6 text-center fnt-wdth">Recovery Rate</div>
-                          <div class="text-h4 text-center fnt-wdth text-weight-thin">
-                            {{getRecoveryRate}}%
-                            <span
-                              class="text-h4 text-center fnt-wdth text-weight-thin"
-                            >({{phCases.recovered}})</span>
-                          </div>
+                          <div class="text-h6 text-center fnt-wdth">Recoveries</div>
+                          <div
+                            class="text-h4 text-center fnt-wdth text-weight-thin"
+                          >{{phCases.recovered}}</div>
                         </q-card-section>
                       </q-card>
                     </div>
