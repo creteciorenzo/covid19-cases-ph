@@ -18,7 +18,8 @@ export default {
       this.data = [
         ["Recovered", this.recoveryCount.length],
         ["Died", this.deathCount.length],
-        ["Admitted", this.admittedCount.length]
+        ["Asymptomatic", this.asymptomaticCount.length],
+        ["Severe", this.severeCount.length]
       ];
     }
   },
@@ -31,13 +32,16 @@ export default {
   },
   computed: {
     deathCount() {
-      return this.summary.filter(d => d.status === "Died");
+      return this.summary.data.filter(d => d.health_status === "Died");
     },
     recoveryCount() {
-      return this.summary.filter(d => d.status === "Recovered");
+      return this.summary.data.filter(d => d.health_status === "Recovered");
     },
-    admittedCount() {
-      return this.summary.filter(d => d.status === "Admitted");
+    asymptomaticCount() {
+      return this.summary.data.filter(d => d.health_status === "Asymptomatic");
+    },
+    severeCount() {
+      return this.summary.data.filter(d => d.health_status === "Severe");
     }
   }
 };

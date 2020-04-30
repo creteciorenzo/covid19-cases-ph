@@ -16,7 +16,7 @@
         >
           <l-tile-layer :url="urlMap" />
           <l-marker
-            v-for="(c, i) in checkPoints"
+            v-for="(c, i) in checkPoints.data"
             :key="i"
             @click="openDialog(c)"
             :lat-lng="setLatLng(c.lat, c.lng)"

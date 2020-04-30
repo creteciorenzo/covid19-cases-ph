@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-table
-      :data="summary"
+      :data="summary.data"
       title="Cases By Health Facility"
       :columns="columns"
       row-key="name"
@@ -23,14 +23,14 @@ export default {
       columns: [
         {
           name: "facility",
-          label: "FACILITY",
+          label: "Facility",
           field: "facility",
           align: "left",
           sortable: true
         },
         {
           name: "casesCount",
-          label: "CONFIRMED",
+          label: "Confirmed",
           align: "left",
           field: "confirmed_cases"
         },
@@ -42,7 +42,7 @@ export default {
         },
         {
           name: "region",
-          label: "REGION",
+          label: "Region",
           align: "left",
           field: "region"
         }

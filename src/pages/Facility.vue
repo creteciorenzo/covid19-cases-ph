@@ -16,7 +16,7 @@
           <l-map :zoom="zoom" :center="center" :options="mapOptions" style="height: 75vh;">
             <l-tile-layer :url="urlMap" />
             <l-marker
-              v-for="(f, i) in summary"
+              v-for="(f, i) in summary.data"
               :key="i"
               @click="openDialog(f)"
               :lat-lng="setLatLng(f.latitude, f.longitude)"

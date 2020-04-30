@@ -2,11 +2,10 @@
   <pie-chart
     :donut="true"
     :suffix="['%']"
-    :colors="['#ff7aad','#0170bf', 'grey']"
+    :colors="['#ff7aad','#0170bf']"
     :data="[
       ['Female', femaleCase],
       ['Male', maleCase],
-      ['TBA', tba]
     ]"
   ></pie-chart>
 </template>
@@ -19,22 +18,21 @@ export default {
   },
   data() {
     return {
-      phCases: [],
       summary: []
     };
   },
   computed: {
     femaleCase() {
-      var filter = this.summary.filter(c => c.gender === "F");
-      return Math.round((100 * filter.length) / this.summary.length);
+      var filter = this.summary.data.filter(c => c.sex === "F");
+      return Math.round((100 * filter.length) / this.summary.data.length);
     },
     maleCase() {
-      var filter = this.summary.filter(c => c.gender === "M");
-      return Math.round((100 * filter.length) / this.summary.length);
+      var filter = this.summary.data.filter(c => c.sex === "M");
+      return Math.round((100 * filter.length) / this.summary.data.length);
     },
     tba() {
-      var filter = this.summary.filter(t => t.gender === "TBA");
-      return Math.round((100 * filter.length) / this.summary.length);
+      var filter = this.summary.data.filter(t => t.sex === "TBA");
+      return Math.round((100 * filter.length) / this.summary.data.length);
     }
   }
 };

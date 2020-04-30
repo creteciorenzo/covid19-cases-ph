@@ -45,7 +45,7 @@
                           <div class="text-h6 text-center fnt-wdth">Total Cases</div>
                           <div
                             class="text-h4 text-center fnt-wdth text-weight-thin"
-                          >{{summary.length}}</div>
+                          >{{phCases.cases}}</div>
                         </q-card-section>
                       </q-card>
                     </div>
@@ -90,7 +90,7 @@
         </q-card>
         <q-card class="chart-card col-md-5" style="margin:1em 0; min-width: 300px">
           <q-card-section>
-            <div class="text-h6">Patient Status Count</div>
+            <div class="text-h6">Patient Health Status Count</div>
           </q-card-section>
           <q-card-section>
             <columnChart />
@@ -203,6 +203,7 @@ import summaryCases from "src/components/SummaryCase";
 import byHealthFacility from "src/components/CaseByHealthFacility";
 import API from "../API";
 import moment from "moment";
+import Axios from "axios";
 export default {
   components: {
     lineChart,
@@ -217,7 +218,7 @@ export default {
   async mounted() {
     this.phCases = await API.phCases();
     this.summary = await API.getSummaryCase();
-    this.testResult = await API.getTestResults();
+    // this.testResult = await API.getTestResults();
     this.date = new Date();
     this.today = moment(this.date).format("MMM DD, YYYY");
   },
@@ -251,19 +252,6 @@ export default {
       }
     };
   },
-  computed: {
-    getFatalityRate() {
-      this.deathCount = this.summary.filter(dc => dc.status === "Died");
-      return Math.round((this.deathCount.length * 100) / this.summary.length);
-    },
-    getRecoveryRate() {
-      this.recoveredCount = this.summary.filter(
-        dc => dc.status === "Recovered"
-      );
-      return Math.round(
-        (this.recoveredCount.length * 100) / this.summary.length
-      );
-    }
-  }
+  computed: {}
 };
 </script>

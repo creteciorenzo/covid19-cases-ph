@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const http1 = axios.create({
-  baseURL: 'https://corona.lmao.ninja'
+  baseURL: 'https://corona.lmao.ninja/v2'
 });
 const http2 = axios.create({
   baseURL: 'https://coronavirus-ph-api.herokuapp.com'

@@ -33,19 +33,19 @@ export default {
   },
   computed: {
     ageGroup1to17() {
-      return this.summary.filter(a => a.age >= 1 && a.age <= 17);
+      return this.summary.data.filter(a => a.age >= 1 && a.age <= 17);
     },
     ageGroup18to30() {
-      return this.summary.filter(a => a.age >= 18 && a.age <= 30);
+      return this.summary.data.filter(a => a.age >= 18 && a.age <= 30);
     },
     ageGroup31to45() {
-      return this.summary.filter(a => a.age >= 31 && a.age <= 45);
+      return this.summary.data.filter(a => a.age >= 31 && a.age <= 45);
     },
     ageGroup46to60() {
-      return this.summary.filter(a => a.age >= 46 && a.age < 60);
+      return this.summary.data.filter(a => a.age >= 46 && a.age < 60);
     },
     ageGroup60plus() {
-      return this.summary.filter(a => a.age > 60);
+      return this.summary.data.filter(a => a.age > 60);
     }
   }
 };

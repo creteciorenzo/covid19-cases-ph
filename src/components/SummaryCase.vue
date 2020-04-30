@@ -2,7 +2,7 @@
   <div>
     <q-table
       title="Summary Cases"
-      :data="summary"
+      :data="summary.data"
       :columns="columns"
       color="primary"
       row-key="name"
@@ -46,7 +46,7 @@
             <q-item>
               <q-form class="q-pa-sm">
                 <label style="padding-right: 10px" class="text-h6 text-weight-regular">Gender:</label>
-                <span class="text-subtitle1 text-weight-light">{{caseInfo.gender}}</span>
+                <span class="text-subtitle1 text-weight-light">{{caseInfo.sex}}</span>
               </q-form>
             </q-item>
             <q-item>
@@ -75,14 +75,11 @@
             </q-item>
             <q-item>
               <q-form class="q-pa-sm">
-                <label style="padding-right: 10px" class="text-h6 text-weight-regular">Status:</label>
-                <span class="text-subtitle1 text-weight-light">{{caseInfo.status}}</span>
-              </q-form>
-            </q-item>
-            <q-item>
-              <q-form class="q-pa-sm">
-                <label style="padding-right: 10px" class="text-h6 text-weight-regular">Resident of:</label>
-                <span class="text-subtitle1 text-weight-light">{{caseInfo.resident_of}}</span>
+                <label
+                  style="padding-right: 10px"
+                  class="text-h6 text-weight-regular"
+                >Health Status:</label>
+                <span class="text-subtitle1 text-weight-light">{{caseInfo.health_status}}</span>
               </q-form>
             </q-item>
           </q-list>
@@ -132,7 +129,7 @@ export default {
         {
           name: "date",
           label: "Date",
-          field: "date"
+          field: "date_of_announcement_to_public"
         },
         {
           name: "age",
@@ -142,16 +139,16 @@ export default {
         {
           name: "gender",
           label: "Gender",
-          field: "gender"
+          field: "sex"
         },
         {
           name: "nationality",
-          label: "nationality",
+          label: "Nationality",
           field: "nationality"
         },
         {
           name: "status",
-          label: "Status",
+          label: "Health Status",
           field: "status"
         },
         { name: "actions", label: "More Info", field: "", align: "center" }

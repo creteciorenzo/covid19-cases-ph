@@ -86,7 +86,9 @@ export default {
     },
 
     chartData() {
-      const dtCombine = this.covidCases.map(a => a.date).flat(1);
+      const dtCombine = this.covidCases.data
+        .map(a => a.date_of_announcement_to_public)
+        .flat(1);
       const uniqueDt = [...new Set(dtCombine)];
       const categories = uniqueDt.slice(Math.max(uniqueDt.length - 10, 1));
       this.dateVal = categories;
